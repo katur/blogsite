@@ -3,6 +3,9 @@
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 ##################################################################
 
+# Database connection and other sensitive settings for project
+*local_settings.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
