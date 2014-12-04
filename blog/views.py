@@ -1,5 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from blog.models import Blog, Post
 
 
-def posts(request):
-    return render(request, 'posts.html', {})
+def blogs(request):
+    blogs = Blog.objects.all()
+    context = {'blogs': blogs}
+    return render(request, 'blogs.html', context)
+
+
+def blog(request, blog_name):
+    posts = Post.objects.filter(blog__name=blog_name).order_by('-time_created')
+    context = {'posts': posts}
+    return render(request, 'posts.html', context)
+
+
+def blog_post(request, blog_name, post_id, post_slug):
+    post = get_object_or_404(Post, blog__name=blog_name,
+                             id=post_id, slug=post_slug)
+    context = {'post': post}
+    return render(request, 'post.html', context)
