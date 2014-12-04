@@ -16,11 +16,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-from local_settings import SECRET_KEY, DEBUG, DATABASES
+# Development uses local_settings file
+try:
+    from local_settings import DEBUG, DATABASES, SECRET_KEY
+
+# Production on heroku uses environment variables $DATABASE_URL and $SECRET_KEY
+except Exception as e:
+    DEBUG = False
+    STATIC_ROOT = 'staticfiles'
+
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,7 +77,17 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# https://devcenter.heroku.com/articles/getting-started-with-django
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)

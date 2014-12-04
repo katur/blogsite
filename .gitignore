@@ -5,6 +5,7 @@
 
 # Database connection and other sensitive settings for project
 *local_settings.py
+staticfiles
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
