@@ -7,6 +7,10 @@
 *local_settings.py
 staticfiles
 
+# Compiled sass/scss files
+*.scssc
+*.sassc
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
