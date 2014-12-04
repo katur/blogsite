@@ -11,7 +11,7 @@ def blogs(request):
 def blog(request, blog_name):
     posts = Post.objects.filter(blog__name=blog_name).order_by('-time_created')
     context = {'posts': posts}
-    return render(request, 'posts.html', context)
+    return render(request, 'blog.html', context)
 
 
 def blog_post(request, blog_name, post_id, post_slug):

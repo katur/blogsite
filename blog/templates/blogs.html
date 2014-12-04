@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  Gonna list the blogs here.
+<ul>
+{% for blog in blogs %}
+  <li>
+    <a href="{% url 'blog_url' blog.slug %}">{{ blog.name }}</a>:
+    {{ blog.description }}
+
+    (Blog Authors:
+    {% for author in blog.authors.all %}
+      {{ author.get_full_name }}{% if forloop.last %}){% else %},{% endif %}
+    {% endfor %}
+  </li>
+{% endfor %}
+</ul>
 {% endblock %}
