@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  Welcome to the Blog Test Site!
+  This is the homepage for some website that includes a blog.
+
+  <br>
+  <br>
+
+  <a href="{% url 'posts_url' %}">Click here</a> for the blog.
 {% endblock %}
