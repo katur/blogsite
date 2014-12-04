@@ -22,7 +22,7 @@ try:
 
 # Production on heroku uses environment variables $DATABASE_URL and $SECRET_KEY
 except Exception as e:
-    DEBUG = False
+    DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
     STATIC_ROOT = 'staticfiles'
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
