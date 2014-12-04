@@ -7,7 +7,7 @@
     <a href="{% url 'blog_url' blog.slug %}">{{ blog.name }}</a>:
     {{ blog.description }}
 
-    (Blog Authors:
+    (Authors:
     {% for author in blog.authors.all %}
       {{ author.get_full_name }}{% if forloop.last %}){% else %},{% endif %}
     {% endfor %}
