@@ -3,6 +3,8 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns(
     '',
+    url(r'', include('website.urls')),
+    url(r'^blog/', include('blog.urls')),
     # Examples:
     # url(r'^$', 'blogsite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
