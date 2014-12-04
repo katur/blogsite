@@ -10,7 +10,8 @@ class Blog(models.Model):
 
     There may be several blogs on different topics within the same website.
     """
-    name = models.CharField(max_length=50, unique=True, blank=True)
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     description = models.TextField(blank=True)
     authors = models.ManyToManyField(User)
 
