@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
+<ul id="all-blogs">
 {% for blog in blogs %}
   <li>
     <a href="{% url 'blog_url' blog.slug %}">{{ blog.name }}</a>:

@@ -8,8 +8,8 @@ def blogs(request):
     return render(request, 'blogs.html', context)
 
 
-def blog(request, blog_name):
-    posts = Post.objects.filter(blog__name=blog_name).order_by('-time_created')
+def blog(request, blog_slug):
+    posts = Post.objects.filter(blog__slug=blog_slug).order_by('-time_created')
     context = {'posts': posts}
     return render(request, 'blog.html', context)
 

@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  Gonna list the posts for this blog here.
+
+<div id="blog-posts">
+{% for post in posts %}
+  <h2>{{ post.title }}</h2>
+
+  <span class="blog-timestamps">
+    Created on {{ post.time_created }}
+    Modified on {{ post.time_modified }}
+  </span>
+
+  <div class="blog-content">
+    {{ post.content }}
+  </div>
+
+  {% if not forloop.last %}<hr>{% endif %}
+{% endfor %}
+</div>
+
 {% endblock %}
