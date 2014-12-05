@@ -45,6 +45,9 @@ def blog_post(request, blog_slug, post_id, post_slug):
 
 def record_post_view(request, post):
     """Record the post view if it is the first of its session."""
+    if not request.session.get('has_session'):
+        request.session['has_session'] = True
+
     session_key = request.session.session_key
 
     if not PostView.objects.filter(post=post, session_key=session_key):
