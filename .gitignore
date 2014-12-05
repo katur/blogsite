@@ -6,6 +6,7 @@
 # Database connection and other sensitive settings for project
 *local_settings.py
 staticfiles
+database_backups
 
 # Compiled sass/scss files
 *.scssc

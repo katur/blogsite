@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 
@@ -19,6 +20,10 @@ class Blog(models.Model):
 
     def __str__(self):
         return unicode(self).encode('utf-8')
+
+    def get_absolute_url(self):
+        return reverse('blog.views.blog',
+                       args=[self.slug])
 
 
 class Post(models.Model):
@@ -49,6 +54,10 @@ class Post(models.Model):
 
     def get_number_of_views(self):
         return PostView.objects.filter(post=self).count()
+
+    def get_absolute_url(self):
+        return reverse('blog.views.blog_post',
+                       args=[self.blog.slug, str(self.id), self.slug])
 
 
 class PostView(models.Model):

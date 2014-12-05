@@ -1,6 +1,10 @@
 {% load blog_extras %}
 
 <div class="blog-post-info">
+  <span class="blog-post-author">
+    By {{ post.author.get_full_name }}
+  </span>
+
   <span class="blog-post-timestamps">
     Published on {{ post.time_published }}
     Last modified {{ post.time_modified }}
@@ -14,6 +18,11 @@
 <div class="blog-post-content">
   {% if truncation_factor %}
     {{ post.content|truncatechars:truncation_factor|extended_markdown }}
+
+    {% ifnotequal post.content|truncatechars:truncation_factor post.content %}
+      <a href="{{ post.get_absolute_url }}">read more</a>
+    {% endifnotequal %}
+
   {% else %}
     {{ post.content|extended_markdown }}
   {% endif %}

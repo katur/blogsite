@@ -12,9 +12,8 @@
 <div id="blog-posts">
 {% for post in posts %}
   <div class="blog-post">
-    {% url 'blog_post_url' blog.slug post.id post.slug as post_url %}
     <h3 class="blog-post-title">
-      <a href="{{ post_url }}">{{ post.title }}</a>
+      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
     </h3>
 
     {% include "post_info_and_content.html" %}

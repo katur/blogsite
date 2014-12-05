@@ -38,6 +38,10 @@ $spacing: 40px
     width: 100%
     margin-bottom: $spacing / 4
 
+    .blog-post-author
+      float: left
+      margin-right: $spacing / 4
+
     .blog-post-timestamps
       color: $gray
       font-style: italic
@@ -52,6 +56,9 @@ $spacing: 40px
 
     h1, h2, h3, h4, ul, p
       margin-bottom: $spacing / 4
+      &:last-child
+        margin-bottom: 0
+
     h1
       font-size: 24px
     h2

@@ -10,7 +10,7 @@
 <ul id="all-blogs">
 {% for blog in blogs %}
   <li>
-    <a href="{% url 'blog_url' blog.slug %}">{{ blog.name }}</a>:
+    <a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a>:
     {{ blog.description }}
 
     (Authors:
