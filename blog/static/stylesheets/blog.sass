@@ -1,9 +1,62 @@
-#blog-posts
-  hr
-    height: 1px
-    border: none
-    background: #ccc
+$light-gray: #ccc
+$gray: #aaa
+$spacing: 40px
 
 #all-blogs
   li
-    margin: 15px 0
+    margin: $spacing / 3 0
+
+#blog-description
+  margin-bottom: $spacing / 2
+
+#blog-posts
+  .blog-post
+    margin-bottom: $spacing
+    padding-bottom: $spacing
+    border-bottom: 1px solid $light-gray
+
+    &:last-child
+      margin-bottom: 0
+      padding-bottom: 0
+      border-bottom: none
+
+    .blog-post-title
+      float: left
+      margin-bottom: $spacing / 4
+
+    .blog-post-content
+      border-left: $spacing / 4 solid $light-gray
+      padding-left: $spacing / 2
+
+
+.blog-post
+  width: 100%
+  float: left
+
+  .blog-post-info
+    float: left
+    width: 100%
+    margin-bottom: $spacing / 4
+
+    .blog-post-timestamps
+      color: $gray
+      font-style: italic
+      float: left
+
+    .blog-post-views
+      color: purple
+      float: right
+
+  .blog-post-content
+    float: left
+
+    h1, h2, h3, h4, ul, p
+      margin-bottom: $spacing / 4
+    h1
+      font-size: 24px
+    h2
+      font-size: 22px
+    h3
+      font-size: 20px
+    h4
+      font-size: 18px

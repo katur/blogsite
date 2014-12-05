@@ -1,30 +1,38 @@
 {% extends "base.html" %}
 {% load blog_extras %}
 
+{% block page_title %}{{ blog.name }}{% endblock %}
+
+{% block back_button %}
+ <a href={% url 'blogs_url' %}>List of all blogs</a>
+{% endblock %}
+
 {% block content %}
-<h2>{{ blog.name }}</h2>
+<div id="blog-description">{{ blog.description }}</div>
 
 <div id="blog-posts">
 {% for post in posts %}
-  {% url 'blog_post_url' blog.slug post.id post.slug as post_url %}
-  <h3><a href="{{ post_url }}">{{ post.title }}</a></h3>
+  <div class="blog-post">
+    {% url 'blog_post_url' blog.slug post.id post.slug as post_url %}
+    <h3 class="blog-post-title">
+      <a href="{{ post_url }}">{{ post.title }}</a>
+    </h3>
 
-  <div class="blog-post-info">
-    <span class="blog-post-timestamps">
-      Published on {{ post.time_published }}
-      Last modified {{ post.time_modified }}
-    </span>
+    <div class="blog-post-info">
+      <span class="blog-post-timestamps">
+        Published on {{ post.time_published }}
+        Last modified {{ post.time_modified }}
+      </span>
 
-    <br>
+      <span class="blog-post-views">
+        Number of views: {{ post.get_number_of_views }}
+      </span>
+    </div>
 
-    <span>Number of views: {{ post.get_number_of_views }}</span>
+    <div class="blog-post-content">
+      {{ post.content|extended_markdown }}
+    </div>
   </div>
-
-  <div class="blog-post-content">
-    {{ post.content|extended_markdown }}
-  </div>
-
-  {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}
 </div>
 {% endblock %}

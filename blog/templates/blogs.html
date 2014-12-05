@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block page_title %}List of blogs{% endblock %}
+
+{% block back_button %}
+  <a href={% url 'home_url' %}>Back home</a>
+{% endblock %}
+
 {% block content %}
 <ul id="all-blogs">
 {% for blog in blogs %}

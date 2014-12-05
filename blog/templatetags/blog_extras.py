@@ -11,13 +11,13 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 @stringfilter
-def extended_markdown(value):
+def extended_markdown(s):
     extensions = [
         'nl2br',  # More intuitive linebreak
         'smarty',  # emdash, endash, pretty quotes
     ]
 
-    return mark_safe(markdown.markdown(force_unicode(value),
+    return mark_safe(markdown.markdown(force_unicode(s),
                                        extensions,
                                        safe_mode=True,
                                        enable_attributes=False))

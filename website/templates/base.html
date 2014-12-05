@@ -3,7 +3,13 @@
   {% include "head.html" %}
 
   <body>
-    <h1>Some Website</h1>
+    <h1 id="site-title">Some Website</h1>
+
+    <div id="page-title-bar">
+      <h2>{% block page_title %}{% endblock %}</h2>
+      <span>{% block back_button %}{% endblock %}</span>
+    </div>
+
     <div id="content">
       {% block content %}{% endblock %}
     </div>

@@ -1,15 +1,29 @@
-$background-color: #fdfdfd
 $base-font-size: 16px
 $base-font-family: Helvetica, Arial, sans-serif
 
+$faint-gray: #fdfdfd
+$google-blue: #2A5DB0
+$pink: #ff0088
+$orange: #ff6600
+$brown: #b16434
+
 body
-  background: $background-color
+  background: $faint-gray
   padding: 50px
   font-size: $base-font-size
   font-family: $base-font-family
 
+#content
+  float: left
+  width: 100%
+  margin-bottom: 50px
+
+a
+  color: $pink
+  &:hover
+    color: $brown
+
 h1, h2, h3, h4
-  margin-bottom: 20px
   font-weight: bold
 
 h1
@@ -26,3 +40,29 @@ h4
 
 h4
   font-variant: small-caps
+
+h1#site-title
+  margin-bottom: 20px
+
+#page-title-bar
+  float: left
+  width: 100%
+  margin-bottom: 20px
+  h2
+    float: left
+  span
+    float: right
+
+ul li
+  list-style: disc inside
+
+ul ul li
+  list-style: circle inside
+  margin-left: 10px
+
+ul ul ul li
+  list-style: square inside
+  margin-left: 20px
+
+ol
+  list-style: decimal inside
