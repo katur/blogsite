@@ -1,6 +1,9 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
+from blogsite.settings import (BLOG_POSTS_PER_PAGE,
+                               BLOG_POST_TRUNCATION_FACTOR)
 from blog.models import Blog, Post, PostView
 
 
@@ -12,8 +15,23 @@ def blogs(request):
 
 def blog(request, blog_slug):
     blog = get_object_or_404(Blog, slug=blog_slug)
-    posts = Post.objects.filter(blog=blog)
-    context = {'blog': blog, 'posts': posts, 'truncation_factor': 500}
+    all_posts = Post.objects.filter(blog=blog)
+    paginator = Paginator(all_posts, BLOG_POSTS_PER_PAGE)
+    page = request.GET.get('page')
+
+    try:
+        display_posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an int, default to first page
+        display_posts = paginator.page(1)
+    except EmptyPage:
+        # If out of range, default to last page
+        display_posts = paginator.page(paginator.num_pages)
+
+    context = {
+        'blog': blog,
+        'posts': display_posts,
+        'truncation_factor': BLOG_POST_TRUNCATION_FACTOR}
     return render(request, 'blog.html', context)
 
 

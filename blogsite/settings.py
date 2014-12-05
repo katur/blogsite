@@ -89,3 +89,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Blog settings
+BLOG_POSTS_PER_PAGE = 10
+BLOG_POST_TRUNCATION_FACTOR = 500
