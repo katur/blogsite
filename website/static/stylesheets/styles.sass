@@ -3,15 +3,33 @@ $base-font-size: 16px
 $base-font-family: Helvetica, Arial, sans-serif
 $vertical-spacing: 20px
 
-// reset default styles
+// Reset default styles
 @import reset
 
-@import font
-@import blog
+// Import the blog styles
+@import ../../../blog/static/stylesheets/blog
 
 body
   background: $background-color
   padding: $vertical-spacing * 3
+  font-size: $base-font-size
+  font-family: $base-font-family
 
 h1, h2, h3, h4
   margin-bottom: $vertical-spacing
+  font-weight: bold
+
+h1
+  font-size: $base-font-size * 3
+
+h2
+  font-size: $base-font-size * 2.2
+
+h3
+  font-size: $base-font-size * 1.5
+
+h4
+  font-size: $base-font-size * 1.2
+
+h4
+  font-variant: small-caps
