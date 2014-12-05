@@ -25,7 +25,7 @@ class Blog(models.Model):
 class Post(models.Model):
     blog = models.ForeignKey(Blog)
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=60)
+    slug = models.SlugField(max_length=60, editable=False)
     author = models.ForeignKey(User)
     time_created = models.DateTimeField(auto_now_add=True)
     time_modified = models.DateTimeField(auto_now=True)
