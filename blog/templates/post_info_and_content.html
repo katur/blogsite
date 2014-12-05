@@ -23,8 +23,10 @@
   {% endif %}
 </div>
 
-{% ifnotequal post.content|truncatechars:truncation_factor post.content %}
-<span class="blog-post-read-more">
-  <a href="{{ post.get_absolute_url }}">read more</a>
-</span>
-{% endifnotequal %}
+{% if truncation_factor %}
+  {% ifnotequal post.content|truncatechars:truncation_factor post.content %}
+  <span class="blog-post-read-more">
+    <a href="{{ post.get_absolute_url }}">read more</a>
+  </span>
+  {% endifnotequal %}
+{% endif %}
