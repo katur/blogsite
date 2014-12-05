@@ -24,12 +24,13 @@ class Blog(models.Model):
 
 class Post(models.Model):
     blog = models.ForeignKey(Blog)
-    title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=60, editable=False)
+    title = models.CharField(max_length=256)
+    slug = models.SlugField(max_length=256, editable=False)
     author = models.ForeignKey(User)
     time_created = models.DateTimeField(auto_now_add=True)
     time_modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
+    number_of_views = models.PositiveIntegerField(default=0)
 
     def save(self, *args, **kwargs):
         """Update timestamps and slug."""

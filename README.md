@@ -9,7 +9,8 @@ make the blog app easily importable into any Django project.
 ## Features
 - Same website can have multiple blogs
 - Any blog can have multiple authors
-- Timestamps generated for post creation and modification times
+- Timestamps generated for post publication and modification times, which can
+  be overridden to allow for a future publication time
 - Posts are sorted by reverse creation time
 - Infrequent moderation tasks (creating a blog, adding authors)
   is done through the Django admin. Such privileges should not be granted
@@ -17,6 +18,7 @@ make the blog app easily importable into any Django project.
 
 
 #### Soon...
+- Keep track of number of post views
 - Pagination (show just 10 posts per page), and truncation in list view to 500
   characters
 - Routine update tasks (adding / editing / deleting posts) can be done
@@ -36,10 +38,11 @@ make the blog app easily importable into any Django project.
 - Search to filter results
 - Schedule posts for future publication (perhaps with optional timestamp
   parameter, that is allowed to be set to the future only)
-- Show conglomeration of posts from all blogs as blogs landing page
-- Option to treat main blog differently (so could live at /blog)
 - Nice way to set options for pagination and truncation
-- Keep track of number of views
+- Show conglomeration of posts from all blogs as landing page.
+  Possibly add toggle to view by popularity, to both this and the individual
+  blog landing pages.
+- Option to treat main blog differently (so could live at /blog)
 
 
 ## Requirements
