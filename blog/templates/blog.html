@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load blog_extras %}
 
 {% block page_title %}{{ blog.name }}{% endblock %}
 
@@ -18,20 +17,7 @@
       <a href="{{ post_url }}">{{ post.title }}</a>
     </h3>
 
-    <div class="blog-post-info">
-      <span class="blog-post-timestamps">
-        Published on {{ post.time_published }}
-        Last modified {{ post.time_modified }}
-      </span>
-
-      <span class="blog-post-views">
-        Number of views: {{ post.get_number_of_views }}
-      </span>
-    </div>
-
-    <div class="blog-post-content">
-      {{ post.content|extended_markdown }}
-    </div>
+    {% include "post_info_and_content.html" %}
   </div>
 {% endfor %}
 </div>
