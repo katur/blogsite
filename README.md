@@ -17,14 +17,14 @@ make the blog app easily importable into any Django project.
   to all authors, but rather to the site administrators.
 - Keep track of number of post views
 - Markdown rendering for posts
+- Pagination (set in settings). TODO: implement default
+- Character truncation in list view (set in settings). TODO: implement default
 
 
 #### Soon...
-- Authors can add, edit, and delete their own posts through a custom interface. 
-  They can set posts to be published in the future. 
+- Authors can add, edit, and delete their own posts through a custom interface.
+  They can set posts to be published in the future.
   When editing, the forms are pre-populated with previous content.
-- Pagination (show just 10 posts per page), and truncation in list view to 500
-  characters
 - Tags (django-taggit), and associated navigation by tag
 - Image uploading
 - Markdown extensions to insert and format images in posts
