@@ -4,4 +4,20 @@
 <h2>{{ post.blog.name }}</h2>
 
 <h3>{{ post.title }}</h3>
+
+<span class="blog-timestamps">
+  Published on {{ post.time_published }}
+  Last modified {{ post.time_modified }}
+</span>
+
+<br>
+
+<span>Number of views: {{ post.get_number_of_views }}</span>
+
+<br>
+
+<div class="blog-content">
+  {{ post.content }}
+</div>
+
 {% endblock %}

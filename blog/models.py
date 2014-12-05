@@ -29,7 +29,6 @@ class Post(models.Model):
     time_published = models.DateTimeField(default=timezone.now())
     time_modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
-    number_of_views = models.PositiveIntegerField(default=0, editable=False)
 
     class Meta:
         ordering = ['-time_published']
@@ -47,3 +46,13 @@ class Post(models.Model):
 
     def __str__(self):
         return unicode(self).encode('utf-8')
+
+    def get_number_of_views(self):
+        return PostView.objects.filter(post=self).count()
+
+
+class PostView(models.Model):
+    post = models.ForeignKey(Post)
+    ip = models.IPAddressField()
+    session_key = models.CharField(max_length=50)
+    time_created = models.DateTimeField(auto_now_add=True)
