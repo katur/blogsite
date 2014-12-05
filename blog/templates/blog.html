@@ -9,6 +9,18 @@
 {% block content %}
 <div id="blog-description">{{ blog.description }}</div>
 
+<div id="blog-posts">
+{% for post in posts %}
+  <div class="blog-post">
+    <h3 class="blog-post-title">
+      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </h3>
+
+    {% include "post_info_and_content.html" %}
+  </div>
+{% endfor %}
+</div>
+
 <div id="blog-pagination">
   <span id="blog-pagination-links">
     {% if posts.has_previous %}
@@ -23,17 +35,5 @@
       <a href="?page={{ posts.next_page_number }}">next</a>
     {% endif %}
   </span>
-</div>
-
-<div id="blog-posts">
-{% for post in posts %}
-  <div class="blog-post">
-    <h3 class="blog-post-title">
-      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-    </h3>
-
-    {% include "post_info_and_content.html" %}
-  </div>
-{% endfor %}
 </div>
 {% endblock %}
