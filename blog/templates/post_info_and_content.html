@@ -17,7 +17,7 @@
 
 <div class="blog-post-content">
   {% if truncation_factor %}
-    {{ post.content|truncatechars:truncation_factor|extended_markdown }}
+    {{ post.content|extended_markdown|truncatechars_html:truncation_factor }}
   {% else %}
     {{ post.content|extended_markdown }}
   {% endif %}
