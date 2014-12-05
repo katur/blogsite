@@ -26,8 +26,8 @@ class Post(models.Model):
     title = models.CharField(max_length=256)
     slug = models.SlugField(max_length=256, editable=False)
     author = models.ForeignKey(User)
-    time_published = models.DateTimeField(editable=False)
-    time_modified = models.DateTimeField(editable=False)
+    time_published = models.DateTimeField(default=timezone.now())
+    time_modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
     number_of_views = models.PositiveIntegerField(default=0, editable=False)
 
@@ -39,11 +39,6 @@ class Post(models.Model):
         if not self.id:
             # The post was just created
             self.slug = slugify(self.title)
-
-            if not self.time_published:
-                self.time_published = timezone.now()
-
-        self.time_modified = timezone.now()
 
         return super(Post, self).save(*args, **kwargs)
 
