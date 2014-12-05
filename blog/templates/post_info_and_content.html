@@ -11,7 +11,8 @@
   </span>
 
   <span class="blog-post-views">
-    Number of views: {{ post.get_number_of_views }}
+    {{ post.get_number_of_views }}
+    view{{post.get_number_of_views|pluralize }}
   </span>
 </div>
 

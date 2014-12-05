@@ -1,5 +1,5 @@
 $light-gray: #ccc
-$gray: #aaa
+$gray: #888
 $spacing: 40px
 
 #all-blogs
@@ -10,19 +10,17 @@ $spacing: 40px
   margin-bottom: $spacing
 
 #blog-pagination
-  width: 100%
-  text-align: right
+  width: 70%
+  margin-bottom: $spacing / 4
 
 #blog-posts
   .blog-post
+    border-top: 1px solid $light-gray
+    padding-top: $spacing
     margin-bottom: $spacing
-    padding-bottom: $spacing
-    border-bottom: 1px solid $light-gray
 
     &:last-child
       margin-bottom: 0
-      padding-bottom: 0
-      border-bottom: none
 
     .blog-post-title
       float: left
@@ -34,7 +32,7 @@ $spacing: 40px
 
 
 .blog-post
-  width: 100%
+  width: 70%
   float: left
 
   .blog-post-info
@@ -50,6 +48,8 @@ $spacing: 40px
       color: $gray
       font-style: italic
       float: left
+      font-size: 14px
+      padding-top: 1px
 
     .blog-post-views
       color: purple
