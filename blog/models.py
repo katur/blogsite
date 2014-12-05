@@ -29,6 +29,7 @@ class Post(models.Model):
     author = models.ForeignKey(User)
     time_created = models.DateTimeField(auto_now_add=True)
     time_modified = models.DateTimeField(auto_now=True)
+    content = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
         """Update timestamps and slug."""
