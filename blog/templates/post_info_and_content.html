@@ -12,5 +12,9 @@
 </div>
 
 <div class="blog-post-content">
-  {{ post.content|extended_markdown }}
+  {% if truncation_factor %}
+    {{ post.content|extended_markdown|truncatechars:truncation_factor }}
+  {% else %}
+    {{ post.content|extended_markdown }}
+  {% endif %}
 </div>

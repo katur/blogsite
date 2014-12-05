@@ -13,7 +13,7 @@ def blogs(request):
 def blog(request, blog_slug):
     blog = get_object_or_404(Blog, slug=blog_slug)
     posts = Post.objects.filter(blog=blog)
-    context = {'blog': blog, 'posts': posts}
+    context = {'blog': blog, 'posts': posts, 'truncation_factor': 500}
     return render(request, 'blog.html', context)
 
 
