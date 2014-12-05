@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load blog_extras %}
 
 {% block content %}
 <h2>{{ post.blog.name }}</h2>
@@ -17,7 +18,7 @@
 <br>
 
 <div class="blog-content">
-  {{ post.content }}
+  {{ post.content|extended_markdown }}
 </div>
 
 {% endblock %}

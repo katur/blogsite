@@ -15,16 +15,16 @@ make the blog app easily importable into any Django project.
 - Infrequent moderation tasks (creating a blog, adding authors)
   is done through the Django admin. Such privileges should not be granted
   to all authors, but rather to the site administrators.
+- Keep track of number of post views
+- Markdown rendering for posts
 
 
 #### Soon...
-- Keep track of number of post views
-- Pagination (show just 10 posts per page), and truncation in list view to 500
-  characters
 - Routine update tasks (adding / editing / deleting posts) can be done
   by any of the listed authors on the project, to their own posts only.
   The forms for updating are pre-populated with the content.
-- Markdown rendering for posts
+- Pagination (show just 10 posts per page), and truncation in list view to 500
+  characters
 - Tags (django-taggit), and associated navigation by tag
 - Markdown extensions to insert and format images in posts
 - Image uploading
