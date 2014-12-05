@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <h2>{{ blog.name }}</h2>
 
 <div id="blog-posts">
 {% for post in posts %}
-  <h3>{{ post.title }}</h3>
+  {% url 'blog_post_url' blog.slug post.id post.slug as post_url %}
+  <h3><a href="{{ post_url }}">{{ post.title }}</a></h3>
 
   <span class="blog-timestamps">
-    Created on {{ post.time_published }}
-    Modified on {{ post.time_modified }}
+    Published on {{ post.time_published }}
+    Last modified {{ post.time_modified }}
   </span>
 
   <div class="blog-content">
