@@ -20,14 +20,14 @@ make the blog app easily importable into any Django project.
 
 
 #### Soon...
-- Routine update tasks (adding / editing / deleting posts) can be done
-  by any of the listed authors on the project, to their own posts only.
-  The forms for updating are pre-populated with the content.
+- Authors can add, edit, and delete their own posts through a custom interface. 
+  They can set posts to be published in the future. 
+  When editing, the forms are pre-populated with previous content.
 - Pagination (show just 10 posts per page), and truncation in list view to 500
   characters
 - Tags (django-taggit), and associated navigation by tag
-- Markdown extensions to insert and format images in posts
 - Image uploading
+- Markdown extensions to insert and format images in posts
 - RSS
 - Commenting (disqus)
 
@@ -36,13 +36,10 @@ make the blog app easily importable into any Django project.
   as you're writing.
 - Share posts through social media
 - Search to filter results
-- Schedule posts for future publication (perhaps with optional timestamp
-  parameter, that is allowed to be set to the future only)
 - Nice way to set options for pagination and truncation
 - Show conglomeration of posts from all blogs as landing page.
-  Possibly add toggle to view by popularity, to both this and the individual
+- Add toggle to view by popularity, to both this and the individual
   blog landing pages.
-- Option to treat main blog differently (so could live at /blog)
 
 
 ## Requirements
