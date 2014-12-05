@@ -1,6 +1,7 @@
 {% extends "base.html" %}
-{% block content %}
+{% load blog_extras %}
 
+{% block content %}
 <h2>{{ blog.name }}</h2>
 
 <div id="blog-posts">
@@ -8,21 +9,22 @@
   {% url 'blog_post_url' blog.slug post.id post.slug as post_url %}
   <h3><a href="{{ post_url }}">{{ post.title }}</a></h3>
 
-  <span class="blog-timestamps">
-    Published on {{ post.time_published }}
-    Last modified {{ post.time_modified }}
-  </span>
+  <div class="blog-post-info">
+    <span class="blog-post-timestamps">
+      Published on {{ post.time_published }}
+      Last modified {{ post.time_modified }}
+    </span>
 
-  <br>
+    <br>
 
-  <span>Number of views: {{ post.get_number_of_views }}</span>
+    <span>Number of views: {{ post.get_number_of_views }}</span>
+  </div>
 
-  <div class="blog-content">
-    {{ post.content }}
+  <div class="blog-post-content">
+    {{ post.content|extended_markdown }}
   </div>
 
   {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}
 </div>
-
 {% endblock %}

@@ -2,26 +2,25 @@
 {% load blog_extras %}
 
 {% block content %}
-  <span id="back-to-blog">
+<span id="back-to-blog">
   {% url 'blog_url' post.blog.slug as blog_url %}
   <a href={{ blog_url }}>Back to {{ post.blog.name }}</a>
 </span>
 
 <h2>{{ post.title }}</h2>
 
-<span class="blog-timestamps">
-  Published on {{ post.time_published }}
-  Last modified {{ post.time_modified }}
-</span>
+<div class="blog-post-info">
+  <span class="blog-post-timestamps">
+    Published on {{ post.time_published }}
+    Last modified {{ post.time_modified }}
+  </span>
 
-<br>
+  <br>
 
-<span>Number of views: {{ post.get_number_of_views }}</span>
-
-<br>
-
-<div class="blog-content">
-  {{ post.content|extended_markdown }}
+  <span>Number of views: {{ post.get_number_of_views }}</span>
 </div>
 
+<div class="blog-post-content">
+  {{ post.content|extended_markdown }}
+</div>
 {% endblock %}
