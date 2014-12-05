@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-  This is the homepage for some website that includes a blog.
+This is the homepage for some website that includes a bunch of content,
+including some blogs.
 
-  <br>
-  <br>
+<br>
+<br>
 
-  <a href="{% url 'blogs_url' %}">Click here</a> for list of all blogs
-  on this website.
+<a href="{% url 'blogs_url' %}">Click here</a> for list of all blogs
+on this website.
 {% endblock %}

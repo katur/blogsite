@@ -9,8 +9,9 @@ def blogs(request):
 
 
 def blog(request, blog_slug):
-    posts = Post.objects.filter(blog__slug=blog_slug).order_by('-time_created')
-    context = {'posts': posts}
+    blog = get_object_or_404(Blog, slug=blog_slug)
+    posts = Post.objects.filter(blog=blog).order_by('-time_created')
+    context = {'blog': blog, 'posts': posts}
     return render(request, 'blog.html', context)
 
 
