@@ -18,12 +18,13 @@
 <div class="blog-post-content">
   {% if truncation_factor %}
     {{ post.content|truncatechars:truncation_factor|extended_markdown }}
-
-    {% ifnotequal post.content|truncatechars:truncation_factor post.content %}
-      <a href="{{ post.get_absolute_url }}">read more</a>
-    {% endifnotequal %}
-
   {% else %}
     {{ post.content|extended_markdown }}
   {% endif %}
 </div>
+
+{% ifnotequal post.content|truncatechars:truncation_factor post.content %}
+<span class="blog-post-read-more">
+  <a href="{{ post.get_absolute_url }}">read more</a>
+</span>
+{% endifnotequal %}
