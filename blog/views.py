@@ -4,10 +4,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
-from blogsite.settings import (BLOG_POSTS_PER_PAGE,
-                               BLOG_POST_TRUNCATION_FACTOR)
 from blog.models import Blog, Post, PostView
 from taggit.models import TaggedItem
+
+try:
+    from django.conf.settings import BLOG_POSTS_PER_PAGE
+except ImportError:
+    BLOG_POSTS_PER_PAGE = 10
+
+try:
+    from django.conf.settings import BLOG_POST_TRUNCATION_FACTOR
+except ImportError:
+    BLOG_POST_TRUNCATION_FACTOR = 500
 
 
 def blogs(request):
@@ -70,7 +78,7 @@ def record_post_view(request, post):
         post_view.save()
 
 
-def get_tag_cloud(count_threshold=0, max_size=1.75, min_size=.75, blog=None):
+def get_tag_cloud(count_threshold=0, max_size=2.0, min_size=.6, blog=None):
     """Get the tags along with their relative sizes for 'tag cloud'.
 
     Tags are only displayed if their count is above threshold.
