@@ -111,11 +111,11 @@ def get_tag_cloud(count_threshold=0, max_size=2.0, min_size=.6, blog=None):
 
     min_count = min(tags_with_counts.itervalues())
     max_count = max(tags_with_counts.itervalues())
-    constant = log(max_count - (min_count-1))/(max_size-min_size or 1)
+    constant = log(max_count - (min_count-1))/(max_size - min_size or 1)
 
     for tag, count in tags_with_counts.iteritems():
         if count >= count_threshold:
-            size = log(count - (min_count-1))/constant + min_size
+            size = log(count - (min_count-1))/(constant or 1) + min_size
             tag_cloud.append({
                 'tag': tag,
                 'size': round(size, 7)
