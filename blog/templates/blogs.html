@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block body_id %}all-blogs{% endblock %}
+
 {% block page_title %}List of blogs{% endblock %}
 
 {% block back_button %}
@@ -7,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<ul id="all-blogs">
+<ul id="blogs">
 {% for blog in blogs %}
   <li>
     <a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a>:
@@ -22,7 +24,7 @@
 {% endfor %}
 </ul>
 
-Tag cloud across all blogs:
+<span id="tag-cloud-disclaimer">Tag cloud across all blogs:</span>
 {% include 'tag_cloud.html' %}
 
 {% endblock %}
