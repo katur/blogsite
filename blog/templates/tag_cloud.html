@@ -1,0 +1,5 @@
+{% for tag in tag_cloud %}
+  <div class="blog-tag" style="font-size: {{ tag.size }}em">
+    {{ tag.tag }}
+  </div>
+{% endfor %}

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block page_title %}{{ blog.name }}{% endblock %}
 
@@ -16,7 +16,7 @@
       <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
     </h3>
 
-    {% include "post_info_and_content.html" %}
+    {% include 'post_info_and_content.html' %}
   </div>
 {% endfor %}
 </div>
@@ -36,4 +36,6 @@
     {% endif %}
   </span>
 </div>
+
+{% include 'tag_cloud.html' %}
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block page_title %}{{ post.title }}{% endblock %}
 
@@ -9,6 +9,6 @@
 
 {% block content %}
 <div class="blog-post">
-  {% include "post_info_and_content.html" %}
+  {% include 'post_info_and_content.html' %}
 </div>
 {% endblock %}
