@@ -2,39 +2,9 @@ $light-gray: #ccc
 $gray: #888
 $dark-gray: #555
 $spacing: 40px
-
-#all-blogs
-  li
-    margin: $spacing / 3 0
-
-#blog-description
-  margin-bottom: $spacing
-
-#blog-pagination
-  width: 100%
-  max-width: 750px
-
-#blog-posts
-  .blog-post
-    border-bottom: 1px solid $light-gray
-    padding-bottom: $spacing
-    margin-bottom: $spacing
-
-    &:last-child
-      margin-bottom: $spacing / 4
-
-    .blog-post-title
-      float: left
-      margin-bottom: $spacing / 4
-
-    .blog-post-content
-      border-left: $spacing / 4 solid $light-gray
-      padding-left: $spacing / 2
-
+$max-post-width: 700px
 
 .blog-post
-  width: 100%
-  max-width: 750px
   float: left
   clear: both
 
@@ -87,3 +57,66 @@ $spacing: 40px
     float: left
     clear: both
     margin-top: $spacing / 2
+
+
+#blog-tag-cloud
+  span
+    float: left
+    padding: 2px
+
+
+////////////////////
+// ALL BLOGS PAGE //
+////////////////////
+#all-blogs
+  li
+    margin: $spacing / 3 0
+
+  #blog-tag-cloud
+    width: 100%
+    max-width: 300px
+    float: left
+
+
+///////////////
+// BLOG PAGE //
+///////////////
+#blog-description
+  margin-bottom: $spacing
+
+#blog-pagination
+  width: 100%
+  max-width: $max-post-width
+
+#blog-posts
+  float: left
+  width: 100%
+  max-width: $max-post-width
+  .blog-post
+    border-bottom: 1px solid $light-gray
+    padding-bottom: $spacing
+    margin-bottom: $spacing
+
+    &:last-child
+      margin-bottom: $spacing / 4
+
+    .blog-post-title
+      float: left
+      margin-bottom: $spacing / 4
+
+    .blog-post-content
+      border-left: $spacing / 4 solid $light-gray
+      padding-left: $spacing / 2
+
+#blog-posts-sidebar
+  float: right
+  width: 100%
+  max-width: 200px
+
+
+//////////////////////
+// SINGLE POST PAGE //
+//////////////////////
+#single-blog-post
+  width: 100%
+  max-width: $max-post-width

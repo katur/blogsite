@@ -19,23 +19,24 @@
     {% include 'post_info_and_content.html' %}
   </div>
 {% endfor %}
-</div>
+  <div id="blog-pagination">
+    <span id="blog-pagination-links">
+      {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}">previous</a>
+      {% endif %}
 
-<div id="blog-pagination">
-  <span id="blog-pagination-links">
-    {% if posts.has_previous %}
-      <a href="?page={{ posts.previous_page_number }}">previous</a>
-    {% endif %}
+      <span class="current">
+        Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+      </span>
 
-    <span class="current">
-      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+      {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}">next</a>
+      {% endif %}
     </span>
-
-    {% if posts.has_next %}
-      <a href="?page={{ posts.next_page_number }}">next</a>
-    {% endif %}
-  </span>
+  </div>
 </div>
 
-{% include 'tag_cloud.html' %}
+<div id="blog-posts-sidebar">
+  {% include 'tag_cloud.html' %}
+</div>
 {% endblock %}

@@ -7,7 +7,6 @@ from django.utils import timezone
 from blogsite.settings import (BLOG_POSTS_PER_PAGE,
                                BLOG_POST_TRUNCATION_FACTOR)
 from blog.models import Blog, Post, PostView
-
 from taggit.models import TaggedItem
 
 
@@ -108,7 +107,6 @@ def get_tag_cloud(count_threshold=0, max_size=1.75, min_size=.75, blog=None):
             size = log(count - (min_count-1))/constant + min_size
             tag_cloud.append({
                 'tag': tag,
-                'count': count,
                 'size': round(size, 7)
             })
 
