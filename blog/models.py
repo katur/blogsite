@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 
+from taggit.managers import TaggableManager
+
 
 class Blog(models.Model):
     """A blog.
@@ -34,6 +36,7 @@ class Post(models.Model):
     time_published = models.DateTimeField(default=timezone.now())
     time_modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
+    tags = TaggableManager(blank=True)
 
     class Meta:
         ordering = ['-time_published']
