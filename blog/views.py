@@ -11,6 +11,7 @@ from taggit.models import TaggedItem
 
 
 def blogs(request):
+    """Render the page listing all blogs."""
     blogs = Blog.objects.all()
     tag_cloud = get_tag_cloud()
     context = {'blogs': blogs, 'tag_cloud': tag_cloud}
@@ -18,6 +19,7 @@ def blogs(request):
 
 
 def blog(request, blog_slug):
+    """Render the landing page for a single blog."""
     blog = get_object_or_404(Blog, slug=blog_slug)
     all_posts = Post.objects.filter(blog=blog)
     tag_cloud = get_tag_cloud(blog=blog)
@@ -45,6 +47,7 @@ def blog(request, blog_slug):
 
 
 def blog_post(request, blog_slug, post_id, post_slug):
+    """Render the page displaying a single post."""
     post = get_object_or_404(Post, blog__slug=blog_slug,
                              id=post_id, slug=post_slug)
     record_post_view(request, post)
