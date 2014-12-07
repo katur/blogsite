@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 from blog.models import Blog, Post, PostView
-from taggit.models import TaggedItem
+from taggit.models import Tag, TaggedItem
 
 try:
     from django.conf.settings import BLOG_POSTS_PER_PAGE
@@ -22,8 +22,7 @@ except ImportError:
 def blogs(request):
     """Render the page listing all blogs."""
     blogs = Blog.objects.all()
-    tag_cloud = get_tag_cloud()
-    context = {'blogs': blogs, 'tag_cloud': tag_cloud}
+    context = {'blogs': blogs}
     return render(request, 'blogs.html', context)
 
 
@@ -31,12 +30,15 @@ def blog(request, blog_slug):
     """Render the landing page for a single blog."""
     blog = get_object_or_404(Blog, slug=blog_slug)
     tag_cloud = get_tag_cloud(blog=blog)
+    posts = Post.objects.filter(blog=blog)
 
     if 'author' in request.GET:
         author = get_object_or_404(User, username=request.GET.get('author'))
-        posts = Post.objects.filter(blog=blog, author=author)
-    else:
-        posts = Post.objects.filter(blog=blog)
+        posts = posts.filter(author=author)
+
+    if 'tag' in request.GET:
+        tag = get_object_or_404(Tag, slug=request.GET.get('tag'))
+        posts = posts.filter(tags__in=[tag])
 
     paginator = Paginator(posts, BLOG_POSTS_PER_PAGE)
     page = request.GET.get('page')

@@ -1,7 +1,9 @@
+{% load blog_extras %}
+
 <div id="blog-tag-cloud">
 {% for tag in tag_cloud %}
   <span style="font-size: {{ tag.size }}em">
-    {{ tag.tag }}
+    <a href="{% add_get 'tag=tag.tag.slug page=' %}">{{ tag.tag }}</a>
   </span>
 {% endfor %}
 </div>
