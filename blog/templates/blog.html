@@ -61,8 +61,12 @@
     </ul>
   </div>
 
-  <div>
+  <div class="blog-sidebar-section">
     Number of posts with current filters: {{ num_filtered }}
+  </div>
+
+  <div class="blog-sidebar-section">
+    <a href="{% add_get 'author= tag= page=' %}">Reset all filters</a>
   </div>
 </div>
 {% endblock %}
