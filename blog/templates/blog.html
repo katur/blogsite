@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load blog_extras %}
 
 {% block page_title %}{{ blog.name }}{% endblock %}
 
@@ -10,33 +11,47 @@
 <div id="blog-description">{{ blog.description }}</div>
 
 <div id="blog-posts">
-{% for post in posts %}
-  <div class="blog-post">
-    <h3 class="blog-post-title">
-      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-    </h3>
+  {% for post in posts %}
+    <div class="blog-post">
+      <h3 class="blog-post-title">
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </h3>
 
-    {% include 'post_info_and_content.html' %}
-  </div>
-{% endfor %}
+      {% include 'post_info_and_content.html' %}
+    </div>
+  {% endfor %}
+
   <div id="blog-pagination">
     <span id="blog-pagination-links">
       {% if posts.has_previous %}
-        <a href="?page={{ posts.previous_page_number }}">previous</a>
+        <a href="{% add_get 'page=posts.previous_page_number' %}">previous</a>
       {% endif %}
 
-      <span class="current">
+      <span>
         Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
       </span>
 
       {% if posts.has_next %}
-        <a href="?page={{ posts.next_page_number }}">next</a>
+        <a href="{% add_get 'page=posts.next_page_number' %}">next</a>
       {% endif %}
     </span>
   </div>
 </div>
 
-<div id="blog-posts-sidebar">
+<div id="blog-sidebar">
+  <div class="blog-sidebar-section">
   {% include 'tag_cloud.html' %}
+  </div>
+
+  <div class="blog-sidebar-section">
+    Contributors:
+    <ul>
+    {% for author in blog.authors.all %}
+      <li><a href="{% add_get 'author=author.username page=' %}">
+        {{ author.get_full_name }}</a></li>
+    {% endfor %}
+      <li><a href="{% add_get 'author= page=' %}">All authors</a></li>
+    </ul>
+  </div>
 </div>
 {% endblock %}

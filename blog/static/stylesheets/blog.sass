@@ -88,10 +88,6 @@ $max-post-width: 700px
 #blog-description
   margin-bottom: $spacing
 
-#blog-pagination
-  width: 100%
-  max-width: $max-post-width
-
 #blog-posts
   float: left
   width: 100%
@@ -112,10 +108,23 @@ $max-post-width: 700px
       border-left: $spacing / 4 solid $light-gray
       padding-left: $spacing / 2
 
-#blog-posts-sidebar
+#blog-pagination
+  width: 100%
+  max-width: $max-post-width
+
+#blog-sidebar
   float: right
   width: 100%
   max-width: 200px
+
+  .blog-sidebar-section
+    float: left
+    width: 100%
+    margin-bottom: $spacing
+
+    &.last-child
+      margin-bottom: 0
+
 
 
 //////////////////////

@@ -1,5 +1,6 @@
 from math import log
 
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -29,10 +30,15 @@ def blogs(request):
 def blog(request, blog_slug):
     """Render the landing page for a single blog."""
     blog = get_object_or_404(Blog, slug=blog_slug)
-    all_posts = Post.objects.filter(blog=blog)
     tag_cloud = get_tag_cloud(blog=blog)
 
-    paginator = Paginator(all_posts, BLOG_POSTS_PER_PAGE)
+    if 'author' in request.GET:
+        author = get_object_or_404(User, username=request.GET.get('author'))
+        posts = Post.objects.filter(blog=blog, author=author)
+    else:
+        posts = Post.objects.filter(blog=blog)
+
+    paginator = Paginator(posts, BLOG_POSTS_PER_PAGE)
     page = request.GET.get('page')
 
     try:
