@@ -1,18 +1,23 @@
 {% load blog_extras %}
 
-<div id="blog-tag-cloud">
-{% for tag in tag_cloud %}
-  <span style="font-size: {{ tag.size }}em">
-    <a href="{% add_get 'tag=tag.tag.slug page=' %}"
-      {% ifequal request.GET.tag tag.tag.slug %}
-        class="active"
-      {% endifequal %}
-    >{{ tag.tag }}</a>
-  </span>
-{% endfor %}
-  <span><a href="{% add_get 'tag= page=' %}"
+<div class="blog-sidebar-section">
+  <div id="blog-tag-cloud">
+  {% for tag in tag_cloud %}
+    <span style="font-size: {{ tag.size }}em">
+      <a href="{% add_get 'tag=tag.tag.slug page=' %}"
+        {% ifequal request.GET.tag tag.tag.slug %}
+          class="active"
+        {% endifequal %}
+      >{{ tag.tag }}</a>
+    </span>
+  {% endfor %}
+  </div>
+</div>
+
+<div class="blog-sidebar-section">
+  <a href="{% add_get 'tag= page=' %}"
     {% if not request.GET.tag %}
       class="active"
     {% endif %}
-  >All tags</a></span>
+  >All tags</a>
 </div>

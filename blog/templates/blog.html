@@ -39,9 +39,7 @@
 </div>
 
 <div id="blog-sidebar">
-  <div class="blog-sidebar-section">
   {% include 'tag_cloud.html' %}
-  </div>
 
   <div class="blog-sidebar-section">
     Contributors:
@@ -54,6 +52,7 @@
       >{{ author.get_full_name }}</a>
       </li>
     {% endfor %}
+
       <li><a href="{% add_get 'author= page=' %}"
         {% if not request.GET.author %}
           class="active"

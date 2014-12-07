@@ -5,14 +5,14 @@
     By {{ post.author.get_full_name }}
   </span>
 
-  <span class="blog-post-timestamps">
-    Published on {{ post.time_published }}
-    Last modified {{ post.time_modified }}
-  </span>
-
   <span class="blog-post-views">
     {{ post.get_number_of_views }}
     view{{post.get_number_of_views|pluralize }}
+  </span>
+
+  <span class="blog-post-timestamps">
+    Published on {{ post.time_published }}
+    Last modified {{ post.time_modified }}
   </span>
 
 </div>

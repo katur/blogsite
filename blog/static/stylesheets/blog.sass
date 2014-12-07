@@ -2,11 +2,12 @@ $light-gray: #ccc
 $gray: #888
 $dark-gray: #555
 $spacing: 40px
-$max-post-width: 700px
+$max-post-width: 650px
 
 .blog-post
   float: left
   clear: both
+  width: 100%
 
   .blog-post-info
     float: left
@@ -17,18 +18,18 @@ $max-post-width: 700px
       float: left
       margin-right: $spacing / 4
 
-    .blog-post-timestamps
-      color: $gray
-      font-style: italic
-      float: left
-      font-size: 14px
-      padding-top: 1px
-
     .blog-post-views
       color: $dark-gray
       float: right
       font-size: 14px
       padding-top: 1px
+
+    .blog-post-timestamps
+      float: left
+      clear: both
+      color: $gray
+      font-style: italic
+      font-size: 14px
 
   .blog-post-content
     float: left
@@ -59,12 +60,6 @@ $max-post-width: 700px
     margin-top: $spacing / 2
 
 
-#blog-tag-cloud
-  span
-    float: left
-    padding: 2px
-
-
 ////////////////////
 // ALL BLOGS PAGE //
 ////////////////////
@@ -74,12 +69,6 @@ $max-post-width: 700px
 
     li
       margin: $spacing / 3 0
-
-  #tag-cloud-disclaimer
-    width: 100%
-    float: left
-    clear: both
-    margin-top: $spacing * 2
 
 
 ///////////////
@@ -128,6 +117,12 @@ $max-post-width: 700px
   a.active
     color: black
     cursor: default
+
+  #blog-tag-cloud
+    span
+      float: left
+      clear: none
+      padding: 2px
 
 
 //////////////////////
