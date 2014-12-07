@@ -40,6 +40,8 @@ def blog(request, blog_slug):
         tag = get_object_or_404(Tag, slug=request.GET.get('tag'))
         posts = posts.filter(tags__in=[tag])
 
+    num_filtered = len(posts)
+
     paginator = Paginator(posts, BLOG_POSTS_PER_PAGE)
     page = request.GET.get('page')
 
@@ -55,6 +57,7 @@ def blog(request, blog_slug):
     context = {
         'blog': blog,
         'posts': display_posts,
+        'num_filtered': num_filtered,
         'truncation_factor': BLOG_POST_TRUNCATION_FACTOR,
         'tag_cloud': tag_cloud,
     }

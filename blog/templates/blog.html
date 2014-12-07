@@ -47,11 +47,23 @@
     Contributors:
     <ul>
     {% for author in blog.authors.all %}
-      <li><a href="{% add_get 'author=author.username page=' %}">
-        {{ author.get_full_name }}</a></li>
+      <li><a href="{% add_get 'author=author.username page=' %}"
+        {% ifequal request.GET.author author.username %}
+          class="active"
+        {% endifequal %}
+      >{{ author.get_full_name }}</a>
+      </li>
     {% endfor %}
-      <li><a href="{% add_get 'author= page=' %}">All authors</a></li>
+      <li><a href="{% add_get 'author= page=' %}"
+        {% if not request.GET.author %}
+          class="active"
+        {% endif %}
+      >All authors</a></li>
     </ul>
+  </div>
+
+  <div>
+    Number of posts with current filters: {{ num_filtered }}
   </div>
 </div>
 {% endblock %}
