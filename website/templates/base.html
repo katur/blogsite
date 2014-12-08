@@ -3,6 +3,18 @@
   {% include "head.html" %}
 
   <body id="{% block body_id %}{% endblock %}">
+    <div id="authentication">
+      {% if user.is_authenticated %}
+        Welcome, {{ user.first_name }}!
+        <br>
+        <a href="{% url 'logout_url' %}?next={{ request.path }}">
+          Log out</a>
+      {% else %}
+        <a href="{% url 'login_url' %}?next={{ request.path }}">
+          Log in</a>
+      {% endif %}
+    </div>
+
     <h1 id="site-title">Some Website</h1>
 
     <div id="page-title-bar">
