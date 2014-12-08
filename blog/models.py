@@ -50,6 +50,10 @@ class Post(models.Model):
         if not self.time_published:
             self.time_published = timezone.now()
 
+        if self.author not in self.blog.authors.all():
+            raise Exception(str(self.author) + ' is not authorized to post to '
+                            + str(self.blog))
+
         return super(Post, self).save(*args, **kwargs)
 
     def __unicode__(self):

@@ -90,14 +90,13 @@ def new_blog_post(request):
                 reverse('blog.views.blog', args=[new_post.blog.slug]))
 
     else:
+        author = request.user
         if 'blog' in request.GET:
             blog = get_object_or_404(Blog, slug=request.GET.get('blog'))
-            form = NewPostForm(initial={'blog': blog,
-                                        'author': request.user})
-            form.fields['author'].widget = forms.HiddenInput()
         else:
-            form = NewPostForm(initial={'author': request.user})
-            form.fields['author'].widget = forms.HiddenInput()
+            blog = None
+        form = NewPostForm(initial={'blog': blog, 'author': author})
+        form.fields['author'].widget = forms.HiddenInput()
 
     context = {'form': form}
     return render(request, 'new_post.html', context)
