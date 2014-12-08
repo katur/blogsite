@@ -14,13 +14,14 @@ make the blog app easily importable into any Django project.
   (e.g. Microsoft-Word-like interface that interprets your text as HTML,
   subject to annoying misinterpretations), or too low-level (raw HTML).
   TODO: custom extension for image captions
-- Authors can add, edit, and delete their own posts through a custom interface.
+- Authors can add their own posts through a custom interface.
   TODO: Add editing and deleting. When editing, pre-populate with
   existing content. Also, restrict any updates to blogs for which the user
   is an author, and restrict editing/deleting to user's own posts.
-- Timestamps are generated for post publication and modification times. Post
-  publication time can be overridden to allow for a future publication time.
-  Modification time is only displayed if it is after publication time.
+- Timestamps are automatically generated for post publication and modification
+  times. Post publication time can be overridden to allow for a future
+  publication time. Modification time is only displayed if it is after
+  publication time.
 - Posts can be tagged with keywords.
 - The number of post views are stored (using Django's session variables,
   so that multiple views by the same person are rarely recorded).
