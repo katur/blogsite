@@ -20,8 +20,11 @@ make the blog app easily importable into any Django project.
   is an author, and restrict editing/deleting to user's own posts.
 - Timestamps are automatically generated for post publication and modification
   times. Post publication time can be overridden to allow for a future
-  publication time. Modification time is only displayed if it is after
+  publication time, in which case the post shows only for the author before
   publication time.
+  Modification time is only displayed if it is after publication time.
+  TODO: limit viewing the blog post page to the author only, until after
+  publication.
 - Posts can be tagged with keywords.
 - The number of post views are stored (using Django's session variables,
   so that multiple views by the same person are rarely recorded).

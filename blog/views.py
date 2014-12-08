@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -35,7 +36,13 @@ def blog(request, blog_slug):
     """Render the landing page for a single blog."""
     blog = get_object_or_404(Blog, slug=blog_slug)
     tag_cloud = get_tag_cloud(blog=blog)
-    posts = Post.objects.filter(blog=blog)
+    if request.user.is_authenticated():
+        posts = Post.objects.filter(Q(blog=blog) &
+                                    (Q(author=request.user) |
+                                     Q(time_published__lte=timezone.now())))
+    else:
+        posts = Post.objects.filter(Q(blog=blog) &
+                                    Q(time_published__lte=timezone.now()))
 
     if 'author' in request.GET:
         author = get_object_or_404(User, username=request.GET.get('author'))
