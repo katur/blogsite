@@ -11,28 +11,31 @@ make the blog app easily importable into any Django project.
 - Any blog can have multiple authors
 - Timestamps generated for post publication and modification times. Post
   publication time can be overridden to allow for a future publication time.
-  TODO: only show modification time when after publication time. Posts are
-  sorted by reverse publication time.
-- Infrequent moderation tasks (creating a blog, adding authors)
-  is done through the Django admin. Such privileges should not be granted
-  to all authors, but rather to the site administrators.
+  TODO: don't show modification time if it is the same as publication time
+- Posts are sorted by reverse publication time.
+  TODO: add toggle to sort by number of views instead of time
+- Infrequent moderation tasks (creating a blog, adding authors) can be done
+  through the Django admin interface. Such privileges should be restricted
+  to site administrators.
+- Authors can add, edit, and delete their own posts through a custom interface.
+  They can set posts to be published in the future.
+  TODO: Still have to do editing and deleting. When editing, pre-populate with
+  existing content. Also, restrict adding/editing to blogs that the user is
+  a contributor for.
 - Keep track of number of post views
 - Markdown rendering for posts
-- Pagination of list view of blog posts (when alllisted, or after filtering).
+- Pagination of list view of blog posts (when all listed, or after filtering).
   Defaults to 10 posts, but can override by defining BLOG\_POSTS\_PER\_PAGE
   in settings.
 - Character truncation in list view. Defaults to 500 characters, but can
   override by defining BLOG\_POST\_TRUNCATION\_FACTOR in settings.
   TODO: an an option to disable truncation entirely
-- Tags (django-taggit), and tag cloud (tag cloud also works across blogs)
-- Nice way to set options for pagination and truncation
+- Posts can be tagged (django-taggit), and frequency of tags can be visualized
+  with a tag cloud (tag cloud works within a blog, or across blogs)
+- Results can be filtered by tag, author. TODO: date, search
 
 
 #### Soon...
-- Authors can add, edit, and delete their own posts through a custom interface.
-  They can set posts to be published in the future.
-  When editing, the forms are pre-populated with previous content.
-- Filtering results by tag, author, date, search
 - Image uploading
 - Markdown extension for inserting and formatting images in posts
 - RSS
