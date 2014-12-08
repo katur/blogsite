@@ -33,7 +33,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, editable=False)
     author = models.ForeignKey(User)
-    time_published = models.DateTimeField(default=timezone.now())
+    time_published = models.DateTimeField(blank=True)
     time_modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
     tags = TaggableManager(blank=True)
@@ -46,6 +46,9 @@ class Post(models.Model):
         if not self.id:
             # The post was just created
             self.slug = slugify(self.title)
+
+        if not self.time_published:
+            self.time_published = timezone.now()
 
         return super(Post, self).save(*args, **kwargs)
 

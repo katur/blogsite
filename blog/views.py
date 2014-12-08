@@ -1,11 +1,16 @@
 from math import log
 
+from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 from blog.models import Blog, Post, PostView
+from blog.forms import NewPostForm
 from taggit.models import Tag, TaggedItem
 
 try:
@@ -72,6 +77,30 @@ def blog_post(request, blog_slug, post_id, post_slug):
     record_post_view(request, post)
     context = {'post': post}
     return render(request, 'post.html', context)
+
+
+@login_required
+def new_blog_post(request):
+    """Render the page to create a new post."""
+    if request.method == 'POST':
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save()
+            return HttpResponseRedirect(
+                reverse('blog.views.blog', args=[new_post.blog.slug]))
+
+    else:
+        if 'blog' in request.GET:
+            blog = get_object_or_404(Blog, slug=request.GET.get('blog'))
+            form = NewPostForm(initial={'blog': blog,
+                                        'author': request.user})
+            form.fields['author'].widget = forms.HiddenInput()
+        else:
+            form = NewPostForm(initial={'author': request.user})
+            form.fields['author'].widget = forms.HiddenInput()
+
+    context = {'form': form}
+    return render(request, 'new_post.html', context)
 
 
 def record_post_view(request, post):
