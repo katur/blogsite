@@ -4,7 +4,7 @@
 
 {% block back_button %}
   {% url 'blog_url' post.blog.slug as blog_url %}
-  <a href={{ blog_url }}>Back to {{ post.blog.name }}</a>
+  <a href={{ blog_url }}>&larr; Back to {{ post.blog.name }}</a>
 {% endblock %}
 
 {% block content %}
