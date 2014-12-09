@@ -98,12 +98,15 @@ def new_blog_post(request):
 
     else:
         author = request.user
+        blogs = Blog.objects.filter(authors__in=[author])
+
         if 'blog' in request.GET:
             blog = get_object_or_404(Blog, slug=request.GET.get('blog'))
         else:
             blog = None
         form = NewPostForm(initial={'blog': blog, 'author': author})
         form.fields['author'].widget = forms.HiddenInput()
+        form.fields['blog'].queryset = blogs
 
     context = {'form': form}
     return render(request, 'new_post.html', context)
