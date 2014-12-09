@@ -33,7 +33,7 @@ class NewPostForm(forms.ModelForm):
                                          help_text=DATETIME_HELP_TEXT)
 
     content = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': '20', 'cols': '100'}),
+        widget=forms.Textarea(attrs={'rows': '24', 'cols': '80'}),
         help_text=MARKDOWN_HELP_TEXT)
 
     class Meta:
