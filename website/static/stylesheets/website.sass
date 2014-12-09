@@ -7,9 +7,11 @@ $pink: #ff0088
 $orange: #ff6600
 $brown: #b16434
 
+$site-padding: 50px
+
 body
   background: $faint-gray
-  padding: 50px
+  padding: $site-padding
   font-size: $base-font-size
   font-family: $base-font-family
   line-height: 1.36
@@ -17,12 +19,17 @@ body
 #content
   float: left
   width: 100%
-  margin-bottom: 50px
+  margin-bottom: $site-padding
+
+#back-button
+  position: absolute
+  top: $site-padding / 2
+  left: $site-padding
 
 #authentication
   position: absolute
-  top: 20px
-  right: 20px
+  top: $site-padding / 2
+  right: $site-padding
 
 b, strong
   font-weight: bold
@@ -57,14 +64,10 @@ h4
 h1#site-title
   margin-bottom: 20px
 
-#page-title-bar
+#page-title
   float: left
   width: 100%
   margin-bottom: 20px
-  h2
-    float: left
-  span
-    float: right
 
 ul li
   list-style: disc inside

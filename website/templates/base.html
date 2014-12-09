@@ -3,6 +3,10 @@
   {% include "head.html" %}
 
   <body id="{% block body_id %}{% endblock %}">
+    <span id="back-button">
+      {% block back_button %}{% endblock %}
+    </span>
+
     <div id="authentication">
       {% if user.is_authenticated %}
         Welcome, {{ user.first_name }}!
@@ -17,10 +21,7 @@
 
     <h1 id="site-title">Some Website</h1>
 
-    <div id="page-title-bar">
-      <h2>{% block page_title %}{% endblock %}</h2>
-      <span>{% block back_button %}{% endblock %}</span>
-    </div>
+    <h2 id="page-title">{% block page_title %}{% endblock %}</h2>
 
     <div id="content">
       {% block content %}{% endblock %}
