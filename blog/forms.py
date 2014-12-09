@@ -7,18 +7,21 @@ from blog.models import Post
 MARKDOWN_HELP_TEXT = """
 Please use
 <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
+Examples:
 <br>
 *bold*, **italics**, - bulleted, 1. numbered
 <br>
-&lt;http://google.com&gt;,
-[click here](http://google.com),
+&lt;http://google.com&gt;
+<br>
+[click here](http://google.com)
 <br>
 ![squirrel](http://squirrel.jpg)
+<br>
 ![squirrel](http://squirrel.jpg "My Pet Squirrel")
 """
 
 DATETIME_HELP_TEXT = """
-Optional; defaults to now.
+Optional; defaults to now. Example:
 <br>
 Date: 1996-12-04
 <br>
