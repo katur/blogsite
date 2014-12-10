@@ -17,6 +17,12 @@
     {% endif %}
   </span>
 
+  {% ifequal user post.author %}
+  <span class="blog-post-edit-button">
+    <a href="{% url 'edit_blog_post_url' post.id post.slug %}">Edit</a>
+  </span>
+  {% endifequal %}
+
 </div>
 
 <div class="blog-post-content">

@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 from blog.models import Blog, Post, PostView
-from blog.forms import NewPostForm
+from blog.forms import PostForm
 from taggit.models import Tag, TaggedItem
 
 try:
@@ -33,7 +33,13 @@ def blogs(request):
 
 
 def blog(request, blog_slug):
-    """Render the landing page for a single blog."""
+    """Render the landing page for a single blog.
+
+    A list of posts is shown. These posts may be filtered by various
+    user-selected filters (e.g. by tag, author). In addition,
+    any draft or post scheduled for future publication show up for
+    the post's author only.
+    """
     blog = get_object_or_404(Blog, slug=blog_slug)
     tag_cloud = get_tag_cloud(blog=blog)
     if request.user.is_authenticated():
@@ -89,31 +95,87 @@ def blog_post(request, blog_slug, post_id, post_slug):
 @login_required
 def new_blog_post(request):
     """Render the page to create a new post."""
+    # TODO: maybe need to check that POST is from the logged in user
     if request.method == 'POST':
-        form = NewPostForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             if 'publish' in request.POST:
-                new_post = form.save(publish_now=True)
+                post = form.save(publish_now=True)
+                return HttpResponseRedirect(
+                    reverse('blog.views.blog_post',
+                            args=[post.blog.slug, post.id, post.slug]))
             else:
-                new_post = form.save()
-
-            return HttpResponseRedirect(
-                reverse('blog.views.blog', args=[new_post.blog.slug]))
+                post = form.save()
+                return HttpResponseRedirect(
+                    reverse('blog.views.edit_blog_post',
+                            args=[post.id, post.slug]))
 
     else:
-        author = request.user
-        blogs = Blog.objects.filter(authors__in=[author])
+        current_user = request.user
+        blogs = Blog.objects.filter(authors__in=[current_user])
 
         if 'blog' in request.GET:
             blog = get_object_or_404(Blog, slug=request.GET.get('blog'))
+            if blog not in blogs:
+                blog = None
         else:
             blog = None
-        form = NewPostForm(initial={'blog': blog, 'author': author})
+
+        form = PostForm(initial={'blog': blog, 'author': current_user})
         form.fields['author'].widget = forms.HiddenInput()
         form.fields['blog'].queryset = blogs
 
     context = {'form': form}
     return render(request, 'new_post.html', context)
+
+
+@login_required
+def edit_blog_post(request, post_id, post_slug):
+    """Render the page edit an existing post."""
+    # TODO: maybe need to check that POST is from the logged in user
+    post = get_object_or_404(Post, id=post_id, slug=post_slug)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            if 'publish' in request.POST:
+                post = form.save(publish_now=True)
+                return HttpResponseRedirect(
+                    reverse('blog.views.blog_post',
+                            args=[post.blog.slug, post.id, post.slug]))
+            else:
+                post = form.save()
+                return HttpResponseRedirect(
+                    reverse('blog.views.edit_blog_post',
+                            args=[post.id, post.slug]))
+
+    else:
+        current_user = request.user
+        if current_user != post.author:
+            raise Exception("{} can't edit {}'s post".format(current_user,
+                            post.author))
+        blogs = Blog.objects.filter(authors__in=[current_user])
+
+        form = PostForm(instance=post)
+        form.fields['author'].widget = forms.HiddenInput()
+        form.fields['blog'].queryset = blogs
+
+    context = {'form': form, 'post': post}
+    return render(request, 'edit_post.html', context)
+
+
+def validate_save_and_redirect(form, request):
+    if form.is_valid():
+        if 'publish' in request.POST:
+            post = form.save(publish_now=True)
+            return HttpResponseRedirect(
+                reverse('blog.views.blog_post',
+                        args=[post.blog.slug, post.id, post.slug]))
+        else:
+            post = form.save()
+            return HttpResponseRedirect(
+                reverse('blog.views.edit_blog_post',
+                        args=[post.id, post.slug]))
 
 
 def record_post_view(request, post):

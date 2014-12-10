@@ -30,7 +30,7 @@ Time: 13:14:34
 """
 
 
-class NewPostForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     published = forms.DateTimeField(required=False,
                                     widget=AdminSplitDateTime(),
                                     label='Publication time',
@@ -46,7 +46,7 @@ class NewPostForm(forms.ModelForm):
                   'author']
 
     def save(self, commit=True, publish_now=False):
-        instance = super(NewPostForm, self).save(commit=False)
+        instance = super(PostForm, self).save(commit=False)
         if publish_now and not instance.published:
             instance.published = timezone.now()
         if commit:
