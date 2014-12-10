@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
-from django.utils import timezone
 
 from taggit.managers import TaggableManager
 
@@ -46,9 +45,6 @@ class Post(models.Model):
         if not self.id:
             # The post was just created
             self.slug = slugify(self.title)
-
-        if not self.published:
-            self.published = timezone.now()
 
         if self.author not in self.blog.authors.all():
             raise Exception(str(self.author) + ' is not authorized to post to '

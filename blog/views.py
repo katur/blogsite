@@ -92,7 +92,11 @@ def new_blog_post(request):
     if request.method == 'POST':
         form = NewPostForm(request.POST)
         if form.is_valid():
-            new_post = form.save()
+            if 'publish' in request.POST:
+                new_post = form.save(publish_now=True)
+            else:
+                new_post = form.save()
+
             return HttpResponseRedirect(
                 reverse('blog.views.blog', args=[new_post.blog.slug]))
 

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.admin.widgets import AdminSplitDateTime
+from django.utils import timezone
 
 from blog.models import Post
 
@@ -43,3 +44,11 @@ class NewPostForm(forms.ModelForm):
         model = Post
         fields = ['blog', 'title', 'content', 'tags', 'published',
                   'author']
+
+    def save(self, commit=True, publish_now=False):
+        instance = super(NewPostForm, self).save(commit=False)
+        if publish_now and not instance.published:
+            instance.published = timezone.now()
+        if commit:
+            instance.save()
+        return instance
