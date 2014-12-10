@@ -12,7 +12,11 @@
 
 <div id="blog-posts">
   {% for post in posts %}
-    <div class="blog-post">
+    <div class="blog-post
+      {% if not post.is_published or post.future_publication %}
+        blog-post-not-yet-published
+      {% endif %}
+    ">
       <h3 class="blog-post-title">
         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
       </h3>

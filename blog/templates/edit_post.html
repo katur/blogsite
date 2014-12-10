@@ -16,11 +16,11 @@
     {{ form.as_table }}
   </table>
 
-  {% if not post.published %}
+  {% if post.is_published %}
+    <input type="submit" name="publish" value="Update Published Post" />
+  {% else %}
     <input type="submit" name="save" value="Update draft" />
     <input type="submit" name="publish" value="Publish" />
-  {% else %}
-    <input type="submit" name="publish" value="Update Published Post" />
   {% endif %}
 </form>
 {% endblock %}

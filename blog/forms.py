@@ -44,9 +44,9 @@ class PostForm(forms.ModelForm):
         fields = ['blog', 'title', 'content', 'tags', 'time_published',
                   'author']
 
-    def save(self, commit=True, publish_now=False):
+    def save(self, commit=True, publish=False):
         instance = super(PostForm, self).save(commit=False)
-        if publish_now and not instance.is_published:
+        if publish and not instance.is_published:
             instance.is_published = True
         if commit:
             instance.save()

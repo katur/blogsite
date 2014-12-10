@@ -40,10 +40,16 @@ class Post(models.Model):
     tags = TaggableManager(blank=True)
 
     class Meta:
-        ordering = ['-time_published']
+        ordering = ['is_published', '-time_published']
+
+    def __unicode__(self):
+        return self.title
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
 
     def save(self, *args, **kwargs):
-        # Reject unauthorized authors
+        # Reject unauthorized author
         if self.author not in self.blog.authors.all():
             raise Exception(str(self.author) + ' is not authorized to post to '
                             + str(self.blog))
@@ -53,24 +59,24 @@ class Post(models.Model):
             # The post was just created
             self.slug = slugify(self.title)
 
-        # If published and no publication time, set it to now
+        # If published and no publication time, set to now
         if self.is_published and not self.time_published:
             self.time_published = timezone.now()
 
         return super(Post, self).save(*args, **kwargs)
 
-    def __unicode__(self):
-        return self.title
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
+    def get_absolute_url(self):
+        return reverse('blog.views.blog_post',
+                       args=[self.blog.slug, str(self.id), self.slug])
 
     def get_number_of_views(self):
         return PostView.objects.filter(post=self).count()
 
-    def get_absolute_url(self):
-        return reverse('blog.views.blog_post',
-                       args=[self.blog.slug, str(self.id), self.slug])
+    def future_publication(self):
+        if self.time_published and self.time_published > timezone.now():
+            return True
+        else:
+            return False
 
 
 class PostView(models.Model):

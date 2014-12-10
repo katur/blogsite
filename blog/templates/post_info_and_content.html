@@ -5,6 +5,24 @@
     By {{ post.author.get_full_name }}
   </span>
 
+  {% if not post.is_published %}
+  <span class="blog-post-publication-status">
+    Not yet published
+  </span>
+  {% endif %}
+
+  {% if post.future_publication %}
+  <span class="blog-post-publication-status">
+    Scheduled for future publication
+  </span>
+  {% endif %}
+
+  {% ifequal user post.author %}
+  <span class="blog-post-edit-button">
+    <a href="{% url 'edit_blog_post_url' post.id post.slug %}">Edit</a>
+  </span>
+  {% endifequal %}
+
   <span class="blog-post-views">
     {{ post.get_number_of_views }}
     view{{ post.get_number_of_views|pluralize }}
@@ -16,12 +34,6 @@
     Last modified {{ post.time_modified }}
     {% endif %}
   </span>
-
-  {% ifequal user post.author %}
-  <span class="blog-post-edit-button">
-    <a href="{% url 'edit_blog_post_url' post.id post.slug %}">Edit</a>
-  </span>
-  {% endifequal %}
 
 </div>
 

@@ -1,4 +1,7 @@
+$lighter-gray: #eee
 $light-gray: #ccc
+$light-blue: #c8d4f0
+$light-yellow: #fff2d2
 $gray: #888
 $dark-gray: #555
 $spacing: 40px
@@ -14,9 +17,16 @@ $max-post-width: 650px
     width: 100%
     margin-bottom: $spacing / 4
 
-    .blog-post-author
+    .blog-post-author, .blog-post-publication-status
       float: left
       margin-right: $spacing / 4
+
+    .blog-post-publication-status
+      color: red
+      font-weight: bold
+
+    .blog-post-edit-button
+      float: left
 
     .blog-post-views
       color: $dark-gray
@@ -81,13 +91,20 @@ $max-post-width: 650px
   float: left
   width: 100%
   max-width: $max-post-width
+
   .blog-post
     border-bottom: 1px solid $light-gray
+    padding-top: $spacing
     padding-bottom: $spacing
-    margin-bottom: $spacing
 
-    &:last-child
-      margin-bottom: $spacing / 4
+    &:first-child
+      padding-top: 0
+
+    &.blog-post-not-yet-published
+      padding-top: $spacing
+      background: repeating-linear-gradient(45deg, $light-yellow, $light-yellow 10px, transparent 10px, transparent 20px)
+
+
 
     .blog-post-title
       float: left
