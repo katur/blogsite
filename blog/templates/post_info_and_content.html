@@ -29,7 +29,12 @@
   </span>
 
   <span class="blog-post-timestamps">
-    Published on {{ post.time_published }}
+    {% if post.time_published %}
+      Published on {{ post.time_published }}
+    {% else %}
+      No publication time
+    {% endif %}
+
     {% if post.time_modified > post.time_published %}
     Last modified {{ post.time_modified }}
     {% endif %}
