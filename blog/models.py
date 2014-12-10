@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 
 from taggit.managers import TaggableManager
 
@@ -32,23 +33,29 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, editable=False)
     author = models.ForeignKey(User)
-    published = models.DateTimeField(blank=True, null=True)
-    modified = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=False)
+    time_published = models.DateTimeField(blank=True, null=True)
+    time_modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
     tags = TaggableManager(blank=True)
 
     class Meta:
-        ordering = ['-published']
+        ordering = ['-time_published']
 
     def save(self, *args, **kwargs):
-        """Update timestamps and slug."""
+        # Reject unauthorized authors
+        if self.author not in self.blog.authors.all():
+            raise Exception(str(self.author) + ' is not authorized to post to '
+                            + str(self.blog))
+
+        # Create slug if it does not yet exist
         if not self.id:
             # The post was just created
             self.slug = slugify(self.title)
 
-        if self.author not in self.blog.authors.all():
-            raise Exception(str(self.author) + ' is not authorized to post to '
-                            + str(self.blog))
+        # If published and no publication time, set it to now
+        if self.is_published and not self.time_published:
+            self.time_published = timezone.now()
 
         return super(Post, self).save(*args, **kwargs)
 

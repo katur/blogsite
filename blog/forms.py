@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.admin.widgets import AdminSplitDateTime
-from django.utils import timezone
 
 from blog.models import Post
 
@@ -31,10 +30,10 @@ Time: 13:14:34
 
 
 class PostForm(forms.ModelForm):
-    published = forms.DateTimeField(required=False,
-                                    widget=AdminSplitDateTime(),
-                                    label='Publication time',
-                                    help_text=DATETIME_HELP_TEXT)
+    time_published = forms.DateTimeField(required=False,
+                                         widget=AdminSplitDateTime(),
+                                         label='Publication time',
+                                         help_text=DATETIME_HELP_TEXT)
 
     content = forms.CharField(
         widget=forms.Textarea(attrs={'rows': '24', 'cols': '80'}),
@@ -42,13 +41,13 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['blog', 'title', 'content', 'tags', 'published',
+        fields = ['blog', 'title', 'content', 'tags', 'time_published',
                   'author']
 
     def save(self, commit=True, publish_now=False):
         instance = super(PostForm, self).save(commit=False)
-        if publish_now and not instance.published:
-            instance.published = timezone.now()
+        if publish_now and not instance.is_published:
+            instance.is_published = True
         if commit:
             instance.save()
         return instance
