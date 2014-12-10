@@ -11,18 +11,21 @@ make the blog app easily importable into any Django project.
 - Posts are written in Markdown, with easy syntax for bold, italics, lists,
   links, and inline images. This is the main reason I wanted to build a
   blogging app, because I find existing alternatives either too high-level
-  (e.g. Microsoft-Word-like interface that interprets your text as HTML,
-  subject to annoying misinterpretations), or too low-level (raw HTML).
+  (with Microsoft-Word-like interfaces that interpret text as HTML,
+  subject to annoying misinterpretations), or too low-level (writing raw HTML).
   TODO: custom extension for image captions
-- Authors can add their own posts through a custom interface.
-  TODO: Add editing and deleting. When editing, pre-populate with
-  existing content. Also, restrict any updates to blogs for which the user
-  is an author, and restrict editing/deleting to user's own posts.
+- Authors can add and edit their own posts through a custom interface.
+  When editing, the form is pre-populated with existing content.
+  TODO: Add deleting (maybe)
+- An author can choose whether to publish a post, or save it as a draft.
+  If saved as a draft, it is only visible to the author (until the author
+  chooses to publish it).
 - Timestamps are automatically generated for post publication and modification
-  times. Post publication time can be overridden to allow for a future
-  publication time, in which case the post shows only for the author before
-  publication time.
+  times.
   Modification time is only displayed if it is after publication time.
+  Publication time can be overridden to allow for a future
+  publication time (in which case the post shows only for the author before
+  publication time).
   TODO: limit viewing the blog post page to the author only, until after
   publication.
 - Posts can be tagged with keywords.
