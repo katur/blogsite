@@ -39,10 +39,10 @@ def blog(request, blog_slug):
     if request.user.is_authenticated():
         posts = Post.objects.filter(Q(blog=blog) &
                                     (Q(author=request.user) |
-                                     Q(time_published__lte=timezone.now())))
+                                     Q(published__lte=timezone.now())))
     else:
         posts = Post.objects.filter(Q(blog=blog) &
-                                    Q(time_published__lte=timezone.now()))
+                                    Q(published__lte=timezone.now()))
 
     if 'author' in request.GET:
         author = get_object_or_404(User, username=request.GET.get('author'))

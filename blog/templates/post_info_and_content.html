@@ -11,9 +11,9 @@
   </span>
 
   <span class="blog-post-timestamps">
-    Published on {{ post.time_published }}
-    {% if post.time_modified > post.time_published %}
-    Modified on {{ post.time_modified }}
+    Published on {{ post.published }}
+    {% if post.modified > post.published %}
+    Modified on {{ post.modified }}
     {% endif %}
   </span>
 

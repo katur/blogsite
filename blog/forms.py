@@ -30,10 +30,10 @@ Time: 13:14:34
 
 
 class NewPostForm(forms.ModelForm):
-    time_published = forms.DateTimeField(required=False,
-                                         widget=AdminSplitDateTime(),
-                                         label='Publication time',
-                                         help_text=DATETIME_HELP_TEXT)
+    published = forms.DateTimeField(required=False,
+                                    widget=AdminSplitDateTime(),
+                                    label='Publication time',
+                                    help_text=DATETIME_HELP_TEXT)
 
     content = forms.CharField(
         widget=forms.Textarea(attrs={'rows': '24', 'cols': '80'}),
@@ -41,5 +41,5 @@ class NewPostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['blog', 'title', 'content', 'tags', 'time_published',
+        fields = ['blog', 'title', 'content', 'tags', 'published',
                   'author']

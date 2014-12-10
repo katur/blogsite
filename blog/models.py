@@ -33,13 +33,13 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, editable=False)
     author = models.ForeignKey(User)
-    time_published = models.DateTimeField(blank=True)
-    time_modified = models.DateTimeField(auto_now=True)
+    published = models.DateTimeField(blank=True, null=True)
+    modified = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
     tags = TaggableManager(blank=True)
 
     class Meta:
-        ordering = ['-time_published']
+        ordering = ['-published']
 
     def save(self, *args, **kwargs):
         """Update timestamps and slug."""
@@ -47,8 +47,8 @@ class Post(models.Model):
             # The post was just created
             self.slug = slugify(self.title)
 
-        if not self.time_published:
-            self.time_published = timezone.now()
+        if not self.published:
+            self.published = timezone.now()
 
         if self.author not in self.blog.authors.all():
             raise Exception(str(self.author) + ' is not authorized to post to '
