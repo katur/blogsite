@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
@@ -90,6 +90,10 @@ def blog_post(request, blog_slug, post_id, post_slug):
     """Render the page displaying a single post."""
     post = get_object_or_404(Post, blog__slug=blog_slug,
                              id=post_id, slug=post_slug)
+    if not post.is_published or post.is_future_publication():
+        if not request.user.is_authenticated() or request.user != post.author:
+            raise Http404
+
     record_post_view(request, post)
     context = {'post': post}
     return render(request, 'post.html', context)
@@ -135,8 +139,9 @@ def new_blog_post(request):
 @login_required
 def edit_blog_post(request, post_id, post_slug):
     """Render the page edit an existing post."""
-    # TODO: maybe need to check that POST is from the logged in user
     post = get_object_or_404(Post, id=post_id, slug=post_slug)
+    if request.user != post.author:
+        raise Http404
 
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)

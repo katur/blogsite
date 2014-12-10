@@ -72,7 +72,7 @@ class Post(models.Model):
     def get_number_of_views(self):
         return PostView.objects.filter(post=self).count()
 
-    def future_publication(self):
+    def is_future_publication(self):
         if self.time_published and self.time_published > timezone.now():
             return True
         else:

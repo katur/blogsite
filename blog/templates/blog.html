@@ -13,7 +13,7 @@
 <div id="blog-posts">
   {% for post in posts %}
     <div class="blog-post
-      {% if not post.is_published or post.future_publication %}
+      {% if not post.is_published or post.is_future_publication %}
         blog-post-not-yet-published
       {% endif %}
     ">
