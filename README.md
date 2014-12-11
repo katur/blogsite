@@ -13,29 +13,18 @@ make the blog app easily importable into any Django project.
   blogging app, because I find existing alternatives either too high-level
   (with Microsoft-Word-like interfaces that interpret text as HTML,
   subject to annoying misinterpretations), or too low-level (writing raw HTML).
-  TODO: custom extension for image captions
 - Authors can add and edit their own posts through a custom interface.
   When editing, the form is pre-populated with existing content.
-  TODO: Add deleting (maybe)
 - An author can choose whether to publish a post, or save it as a draft.
   If saved as a draft, it is only visible to the author (until the author
   chooses to publish it).
 - Timestamps are automatically generated for post publication and modification
-  times.
-  Modification time is only displayed if it is after publication time.
-  Publication time can be overridden to allow for a future
-  publication time (in which case the post shows only for the author before
-  publication time).
-  TODO: limit viewing the blog post page to the author only, until after
-  publication.
+  times. Modification time is only displayed if it is after publication time.
+- Publication time can be overridden to allow for a future publication time
+  (in which case the post shows only for the author before publication time).
 - Posts can be tagged with keywords.
 - The number of post views are stored (using Django's session variables,
   so that multiple views by the same person are rarely recorded).
-- TODO: Image uploading
-- TODO: Markdown extension for image captions
-- TODO: live Markdown rendering
-- TODO: Commenting (through disqus)
-- TODO: Post can be shared with social media
 
 ### Blog-level features
 - A blog can have multiple authors
@@ -43,24 +32,35 @@ make the blog app easily importable into any Django project.
   (but can override by defining BLOG\_POSTS\_PER\_PAGE in settings).
 - Posts are truncated in the list view, defaulting to 500 characters
   (but can override by defining BLOG\_POST\_TRUNCATION\_FACTOR in settings).
-  TODO: an an option to disable truncation entirely
 - List-view of posts is sorted by reverse publication time.
-  TODO: add option to sort by number of views instead of time
-- Frequency of tags within a blog visualized with a tag cloud
 - The list of posts can be filtered by tag and/or author.
-  TODO: add date filter, search filter
-- TODO: RSS generator
+- Frequency of tags within a blog visualized with a tag cloud.
+- Each blog has an RSS feed (the feed includes all posts from the blog)
 
 ### Global features
 - Same website can have multiple blogs
 - Infrequent moderation tasks (creating a blog, adding authors) can be done
   through the Django admin interface. Such privileges should be restricted
   to site administrators.
-- TODO: (maybe) show conglomeration of posts
+
+
+### Future features (not implemented yet)
+- image uploading
+- live Markdown rendering while editing a post
+- commenting (Disqus)
+- allow deleting posts by the author (make sure to cascade effects)
+- Markdown extension for image captions
+- add option to sort posts by popularity (number of views), instead of
+- add search term filter, and date filter. Refactor filtering so that each
+  filter builds on the others that are already selected (e.g. so that tag cloud
+  only reflects tags for the currently author selection)
+- sharing posts on social media
+- show conglomeration of posts across blogs
+- better organize CSS so that styles are easier to customize
+- add an option to disable truncation entirely
 
 
 ## Requirements
-
 - Python version is specified in `runtime.txt`.
 - Database is in MySQL
 - Package dependencies are listed in `requirements.txt`.
