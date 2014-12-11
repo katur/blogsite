@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from blog.feeds import AllPostsFeed
 
 
 urlpatterns = patterns(
@@ -9,3 +10,6 @@ urlpatterns = patterns(
     url(r'^([^/]+)$', 'blog', name='blog_url'),
     url(r'^([^/]+)/(\d+)/([^/]+)$', 'blog_post', name='blog_post_url'),
 )
+
+urlpatterns += patterns('', url(r'^(?P<blog_slug>[^/]+)/rss$',
+                        AllPostsFeed(), name='blog_rss_url'))

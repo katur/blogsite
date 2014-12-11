@@ -43,15 +43,10 @@ def blog(request, blog_slug):
     blog = get_object_or_404(Blog, slug=blog_slug)
 
     if request.user.is_authenticated():
-        posts = Post.objects.filter(
-            Q(blog=blog) &
-            (Q(author=request.user) |
-             (Q(is_published=True) & Q(time_published__lte=timezone.now()))))
+        posts = get_visible_posts(blog, request.user)
 
     else:
-        posts = Post.objects.filter(
-            Q(blog=blog) &
-            (Q(is_published=True) & Q(time_published__lte=timezone.now())))
+        posts = get_visible_posts(blog)
 
     # Get tag cloud for all viewable posts, before applying filters
     tag_cloud = get_tag_cloud(posts=posts)
@@ -183,10 +178,33 @@ def edit_blog_post(request, post_id, post_slug):
     return render(request, 'edit_post.html', context)
 
 
+####################
+# HELPER FUNCTIONS #
+####################
+def get_visible_posts(blog, user=None):
+    """
+    Get all posts for this blog that are visible to the user.
+
+    If no user provided, limits to posts already published.
+
+    If a user is provided, any non-public posts authored by that user (drafts,
+    or posts scheduled for future publication) are included too.
+    """
+    if user:
+        return Post.objects.filter(
+            Q(blog=blog) &
+            (Q(author=user) |
+             (Q(is_published=True) & Q(time_published__lte=timezone.now()))))
+    else:
+        return Post.objects.filter(Q(blog=blog) &
+                                   Q(is_published=True) &
+                                   Q(time_published__lte=timezone.now()))
+
+
 def validate_save_and_redirect(form, request):
     if form.is_valid():
         if 'publish' in request.POST:
-            post = form.save(publish_now=True)
+            post = form.save(publish=True)
             return HttpResponseRedirect(
                 reverse('blog.views.blog_post',
                         args=[post.blog.slug, post.id, post.slug]))
@@ -198,7 +216,10 @@ def validate_save_and_redirect(form, request):
 
 
 def record_post_view(request, post):
-    """Record the post view if it is the first of its session."""
+    """Record in the database that a post was viewed.
+
+    Only records post views if they haven't occurred in the same session.
+    """
     if not request.session.get('has_session'):
         request.session['has_session'] = True
 
