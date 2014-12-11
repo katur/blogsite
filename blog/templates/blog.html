@@ -51,6 +51,10 @@
   {% endif %}
 
   <div class="blog-sidebar-section">
+    <a href="{% url 'blog_rss_url' blog.slug %}">RSS for this blog</a>
+  </div>
+
+  <div class="blog-sidebar-section">
     {% include 'tag_cloud.html' %}
   </div>
 
