@@ -105,11 +105,18 @@ def blog_post(request, blog_slug, post_id, post_slug):
 @login_required
 def new_blog_post(request):
     """Render the page to create a new post."""
-    # TODO: maybe need to check that POST is from the logged in user
+    current_user = request.user
+
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            if 'publish' in request.POST:
+            # TODO: I think this check is overkill, but maybe good to have
+            if (current_user != form.cleaned_data['author'] or
+                    current_user not in
+                    form.cleaned_data['blog'].authors.all()):
+                raise Http404
+
+            elif 'publish' in request.POST:
                 post = form.save(publish=True)
                 return HttpResponseRedirect(
                     reverse('blog.views.blog_post',
@@ -121,7 +128,6 @@ def new_blog_post(request):
                             args=[post.id, post.slug]))
 
     else:
-        current_user = request.user
         blogs = Blog.objects.filter(authors__in=[current_user])
 
         if 'blog' in request.GET:
@@ -143,32 +149,34 @@ def new_blog_post(request):
 def edit_blog_post(request, post_id, post_slug):
     """Render the page edit an existing post."""
     post = get_object_or_404(Post, id=post_id, slug=post_slug)
-    if request.user != post.author:
+    current_user = request.user
+
+    # Only the author can edit the post, and the author must still be listed
+    # as a contributor.
+    if (current_user != post.author or
+            current_user not in post.blog.authors.all()):
         raise Http404
 
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             if 'publish' in request.POST:
-                post = form.save(publish=True)
+                form.save(publish=True)
                 return HttpResponseRedirect(
                     reverse('blog.views.blog_post',
                             args=[post.blog.slug, post.id, post.slug]))
             else:
-                post = form.save()
+                form.save()
                 return HttpResponseRedirect(
                     reverse('blog.views.edit_blog_post',
                             args=[post.id, post.slug]))
 
     else:
-        current_user = request.user
-        if current_user != post.author:
-            raise Exception("{} can't edit {}'s post".format(current_user,
-                            post.author))
-        blogs = Blog.objects.filter(authors__in=[current_user])
-
         form = PostForm(instance=post)
         form.fields['author'].widget = forms.HiddenInput()
+
+        # Limit blogs dropdown to those the current user can edit
+        blogs = Blog.objects.filter(authors__in=[current_user])
         form.fields['blog'].queryset = blogs
 
     context = {'form': form, 'post': post}
