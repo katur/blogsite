@@ -41,7 +41,7 @@ def blog(request, blog_slug):
     the post's author only.
     """
     blog = get_object_or_404(Blog, slug=blog_slug)
-    tag_cloud = get_tag_cloud(blog=blog)
+
     if request.user.is_authenticated():
         posts = Post.objects.filter(
             Q(blog=blog) &
@@ -52,6 +52,9 @@ def blog(request, blog_slug):
         posts = Post.objects.filter(
             Q(blog=blog) &
             (Q(is_published=True) & Q(time_published__lte=timezone.now())))
+
+    # Get tag cloud for all viewable posts, before applying filters
+    tag_cloud = get_tag_cloud(posts=posts)
 
     if 'author' in request.GET:
         author = get_object_or_404(User, username=request.GET.get('author'))
@@ -201,7 +204,7 @@ def record_post_view(request, post):
         post_view.save()
 
 
-def get_tag_cloud(count_threshold=0, max_size=2.0, min_size=.6, blog=None):
+def get_tag_cloud(posts=None, count_threshold=0, max_size=2.0, min_size=.6):
     """Get the tags along with their relative sizes for 'tag cloud'.
 
     Tags are only displayed if their count is above threshold.
@@ -218,8 +221,7 @@ def get_tag_cloud(count_threshold=0, max_size=2.0, min_size=.6, blog=None):
     tags_with_counts = {}
     tag_cloud = []
 
-    if blog:
-        posts = Post.objects.filter(blog=blog)
+    if posts:
         for post in posts:
             for tag in post.tags.all():
                 tally(tag, tags_with_counts)
