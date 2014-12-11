@@ -45,7 +45,7 @@
 <div id="blog-sidebar">
   {% if user.is_authenticated and user in blog.authors.all %}
   <div class="blog-sidebar-section">
-    <a href="{% url 'new_blog_post_url' %}{% add_get 'blog=blog.slug' %}">
+    <a href="{% url 'new_blog_post_url' %}?blog={{ blog.slug }}">
       Add a new post</a>
   </div>
   {% endif %}
