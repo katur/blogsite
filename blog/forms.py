@@ -48,6 +48,10 @@ class PostForm(forms.ModelForm):
         instance = super(PostForm, self).save(commit=False)
         if publish and not instance.is_published:
             instance.is_published = True
+
         if commit:
             instance.save()
+
+            # Below needed to save the tags
+            self.save_m2m()
         return instance
