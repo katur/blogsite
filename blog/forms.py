@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.admin.widgets import AdminSplitDateTime
 
-from blog.models import Post
+from blog.models import Post, UploadedImage
 
 
 MARKDOWN_HELP_TEXT = """
@@ -57,5 +57,6 @@ class PostForm(forms.ModelForm):
         return instance
 
 
-class UploadImageForm(forms.Form):
-    image = forms.ImageField()
+class UploadImageForm(forms.ModelForm):
+    class Meta:
+        model = UploadedImage

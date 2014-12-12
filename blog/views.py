@@ -169,9 +169,9 @@ def upload_image(request):
     if request.method == 'POST':
         form = UploadImageForm(request.POST, request.FILES)
         if form.is_valid():
-            image = request.FILES['image']
+            image = form.save()
             redirect_url = "{}?image={}".format(
-                reverse('blog.views.upload_image'), image.name)
+                reverse('blog.views.upload_image'), image.image.name)
             return HttpResponseRedirect(redirect_url)
     else:
         form = UploadImageForm()

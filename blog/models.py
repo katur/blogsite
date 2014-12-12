@@ -84,3 +84,16 @@ class PostView(models.Model):
     ip = models.IPAddressField()
     session_key = models.CharField(max_length=50)
     time_created = models.DateTimeField(auto_now_add=True)
+
+
+def get_updated_filename(instance, filename):
+    path = "images/{}/{}{}".format(instance.user.id, instance.time_uploaded,
+                                   filename)
+    return path
+
+
+class UploadedImage(models.Model):
+    time_uploaded = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User)
+    title = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(upload_to=get_updated_filename)

@@ -18,7 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Development uses local_settings file
 try:
-    from local_settings import DEBUG, DATABASES, SECRET_KEY
+    from local_settings import (DEBUG, DATABASES, SECRET_KEY,
+                                AWS_S3_ACCESS_KEY_ID,
+                                AWS_S3_SECRET_ACCESS_KEY,
+                                AWS_STORAGE_BUCKET_NAME)
 
 # Production on heroku uses environment variables $DATABASE_URL and $SECRET_KEY
 except Exception as e:
@@ -107,7 +110,11 @@ LOGIN_REDIRECT_URL = 'home_url'
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '//s3.amazonaws.com/blogsitemedia'
 
+
+# AWS / Media
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_QUERYSTRING_AUTH = False     # skip some complicated shit re: AWS auth
