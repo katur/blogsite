@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -87,8 +89,7 @@ class PostView(models.Model):
 
 
 def get_updated_filename(instance, filename):
-    path = "images/{}/{}{}".format(instance.user.id, instance.time_uploaded,
-                                   filename)
+    path = "images/{}/{}_{}".format(instance.user.id, uuid.uuid4(), filename)
     return path
 
 
