@@ -110,17 +110,7 @@ def new_blog_post(request):
                     current_user not in
                     form.cleaned_data['blog'].authors.all()):
                 raise Http404
-
-            elif 'publish' in request.POST:
-                post = form.save(publish=True)
-                return HttpResponseRedirect(
-                    reverse('blog.views.blog_post',
-                            args=[post.blog.slug, post.id, post.slug]))
-            else:
-                post = form.save()
-                return HttpResponseRedirect(
-                    reverse('blog.views.edit_blog_post',
-                            args=[post.id, post.slug]))
+            return save_post_and_redirect(form, request)
 
     else:
         blogs = Blog.objects.filter(authors__in=[current_user])
@@ -155,16 +145,7 @@ def edit_blog_post(request, post_id, post_slug):
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            if 'publish' in request.POST:
-                form.save(publish=True)
-                return HttpResponseRedirect(
-                    reverse('blog.views.blog_post',
-                            args=[post.blog.slug, post.id, post.slug]))
-            else:
-                form.save()
-                return HttpResponseRedirect(
-                    reverse('blog.views.edit_blog_post',
-                            args=[post.id, post.slug]))
+            return save_post_and_redirect(form, request)
 
     else:
         form = PostForm(instance=post)
@@ -201,18 +182,17 @@ def get_visible_posts(blog, user=None):
                                    Q(time_published__lte=timezone.now()))
 
 
-def validate_save_and_redirect(form, request):
-    if form.is_valid():
-        if 'publish' in request.POST:
-            post = form.save(publish=True)
-            return HttpResponseRedirect(
-                reverse('blog.views.blog_post',
-                        args=[post.blog.slug, post.id, post.slug]))
-        else:
-            post = form.save()
-            return HttpResponseRedirect(
-                reverse('blog.views.edit_blog_post',
-                        args=[post.id, post.slug]))
+def save_post_and_redirect(form, request):
+    if 'publish' in request.POST:
+        post = form.save(publish=True)
+        return HttpResponseRedirect(
+            reverse('blog.views.blog_post',
+                    args=[post.blog.slug, post.id, post.slug]))
+    else:
+        post = form.save()
+        return HttpResponseRedirect(
+            reverse('blog.views.edit_blog_post',
+                    args=[post.id, post.slug]))
 
 
 def record_post_view(request, post):
