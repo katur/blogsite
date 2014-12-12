@@ -58,6 +58,7 @@ make the blog app easily importable into any Django project.
 - show conglomeration of posts across blogs
 - better organize CSS so that styles are easier to customize
 - add an option to disable truncation entirely
+- inline video tag
 
 
 ## Requirements
