@@ -55,3 +55,7 @@ class PostForm(forms.ModelForm):
             # Below needed to save the tags
             self.save_m2m()
         return instance
+
+
+class UploadImageForm(forms.Form):
+    image = forms.ImageField()

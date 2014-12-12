@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Upload an image{% endblock %}
+
+{% block back_button %}
+  <a href={% url 'home_url' %}>&larr; Back Home</a>
+{% endblock %}
+
+{% block content %}
+{% if image %}
+The image was {{ image }}
+{% endif %}
+
+<form enctype="multipart/form-data"
+      action="{% url 'upload_image_url' %}"
+      method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit" />
+</form>
+{% endblock %}

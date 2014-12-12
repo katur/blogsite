@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 from blog.models import Blog, Post, PostView
-from blog.forms import PostForm
+from blog.forms import PostForm, UploadImageForm
 from taggit.models import Tag, TaggedItem
 
 try:
@@ -157,6 +157,26 @@ def edit_blog_post(request, post_id, post_slug):
 
     context = {'form': form, 'post': post}
     return render(request, 'edit_post.html', context)
+
+
+@login_required
+def upload_image(request):
+    if 'image' in request.GET:
+        image = request.GET.get('image')
+    else:
+        image = None
+
+    if request.method == 'POST':
+        form = UploadImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = request.FILES['image']
+            redirect_url = "{}?image={}".format(
+                reverse('blog.views.upload_image'), image.name)
+            return HttpResponseRedirect(redirect_url)
+    else:
+        form = UploadImageForm()
+    context = {'form': form, 'image': image}
+    return render(request, 'upload_image.html', context)
 
 
 ####################
