@@ -51,7 +51,9 @@
   {% endif %}
 
   <div class="blog-sidebar-section">
-    <a href="{% url 'blog_rss_url' blog.slug %}">RSS for this blog</a>
+    <a href="{% url 'blog_rss_url' blog.slug %}">
+      <img src="http://www.w3schools.com/rss/rss.gif" width="36" height="14">
+    </a>
   </div>
 
   <div class="blog-sidebar-section">
