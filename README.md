@@ -1,18 +1,49 @@
-# Blog
+# Markdown Blog
 
 
 ## Overview
-This is a website to test a blogging app. The goal is to eventually
-make the blog app easily importable into any Django project.
+This is a test website that includes a blogging app. The goal is to eventually
+make the blogging app easily importable into any Django project.
+
+The main inspiration for this blogging app is that posts are written in
+Markdown. I chose to do this because I find existing alternatives either
+too high-level (with Microsoft-Word-like interfaces that interpret text as
+HTML, subject to annoying misinterpretations),
+or too low-level (writing raw HTML).
+Specifically, I want to add this app to my mom's birding website, and she has
+complained in the past about her existing blogs on Blogger or Wordpress,
+where text is not always formatted the way she intends.
+But the alternative of writing in raw HTML is too cumbersome.
+I'm hoping that Markdown strikes a nice balance.
+
+This blogging app is not meant to be like wordpress.com or blogger.com,
+where anyone can create an account and create their own blogs.
+Rather, it is meant to be added as an extension
+to a website where the website administrators control what blogs get made and
+who contributes to them.
+Some examples of where it might be useful:
+
+- An individual's portfolio site, with a single blog and single contributor
+- A site like my mom's birding website, which will have several blogs with
+  several contributors besides my mom, but my mom being the only administrator
+  that controls what blogs are created and who can contribute to them
+- A larger site, such as a newspaper or nonprofit, that might run hundreds
+  of blogs with thousands of contributors, but that would still want to
+  maintain strict control over which blogs are made and who can write to them
+
+
+## Notes to Grader
+I got permission from the Professor to do this instead of the question/answer
+service. It is similar to a blog project done in the past. One major difference
+is that this
+
 
 
 ## Features
 ### Post-level features
 - Posts are written in Markdown, with easy syntax for bold, italics, lists,
-  links, and inline images. This is the main reason I wanted to build a
-  blogging app, because I find existing alternatives either too high-level
-  (with Microsoft-Word-like interfaces that interpret text as HTML,
-  subject to annoying misinterpretations), or too low-level (writing raw HTML).
+  links, and inline images.
+
 - Authors can add and edit their own posts through a custom interface.
   When editing, the form is pre-populated with existing content.
 - During editing, a preview of the Markdown render can be viewed live (using
