@@ -163,10 +163,9 @@ def edit_blog_post(request, post_id, post_slug):
 def upload_image(request):
     if 'image' in request.GET:
         image = request.GET.get('image')
-    else:
-        image = None
+        context = {'image': image}
 
-    if request.method == 'POST':
+    elif request.method == 'POST':
         form = UploadImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save()
@@ -176,7 +175,8 @@ def upload_image(request):
     else:
         form = UploadImageForm(initial={'user': request.user})
         form.fields['user'].widget = forms.HiddenInput()
-    context = {'form': form, 'image': image}
+        context = {'form': form}
+
     return render(request, 'upload_image.html', context)
 
 

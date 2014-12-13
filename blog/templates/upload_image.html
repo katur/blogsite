@@ -4,8 +4,10 @@
 
 {% block content %}
 {% if image %}
+
 URL of the image just uploaded: {{ MEDIA_URL }}{{ image }}
-{% endif %}
+
+{% else %}
 
 <form enctype="multipart/form-data"
       action="{% url 'upload_image_url' %}"
@@ -16,4 +18,6 @@ URL of the image just uploaded: {{ MEDIA_URL }}{{ image }}
   </table>
   <input type="submit" />
 </form>
+
+{% endif %}
 {% endblock %}
