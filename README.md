@@ -15,11 +15,14 @@ make the blog app easily importable into any Django project.
   subject to annoying misinterpretations), or too low-level (writing raw HTML).
 - Authors can add and edit their own posts through a custom interface.
   When editing, the form is pre-populated with existing content.
-- Authors can upload images, and insert these into posts with the standard
-  Markdown syntax.
-- An author can choose whether to publish a post, or save it as a draft.
-  If saved as a draft, it is only visible to the author (until the author
-  chooses to publish it).
+- During editing, a preview of the Markdown render can be viewed live (using
+  the Markdown.js Javascript Markdown parser).
+- Authors can upload images. The images can be inserted into posts with the
+  standard Markdown syntax, using the url of the uploaded image. (Any images
+  available on the web can be uploaded this way.)
+- An author can choose whether to publish a post immediately, or save it as a
+  draft. If saved as a draft, it is only visible to the author (until the
+  author chooses to publish it).
 - Timestamps are automatically generated for post publication and modification
   times. Modification time is only displayed if it is after publication time.
 - Publication time can be overridden to allow for a future publication time
@@ -27,7 +30,7 @@ make the blog app easily importable into any Django project.
 - Posts can be tagged with keywords.
 - The number of post views are stored (using Django's session variables,
   so that multiple views by the same person are rarely recorded).
-- Commenting on individual posts with Disqus.
+- Anyone can comment on posts (with Disqus commenting).
 
 ### Blog-level features
 - A blog can have multiple authors
@@ -48,18 +51,19 @@ make the blog app easily importable into any Django project.
 
 
 ### Future features (not implemented yet)
-- live Markdown rendering while editing a post
-- allow deleting posts by the author (make sure to cascade effects)
-- Markdown extension for image captions
-- add option to sort posts by popularity (number of views), instead of
-- add search term filter, and date filter. Refactor filtering so that each
+- Markdown extension for image captions.
+- Markdown extension for video.
+- Add option to sort posts by popularity (number of views), instead of
+- Add search term filter, and date filter. Refactor filtering so that each
   filter builds on the others that are already selected (e.g. so that tag cloud
   only reflects tags for the currently author selection)
-- sharing posts on social media
-- show conglomeration of posts across blogs
-- better organize CSS so that styles are easier to customize
-- add an option to disable truncation entirely
-- inline video tag
+- Allow sharing posts on social media.
+- Allow deleting posts by the author (skipped for now because want to make sure
+  to cascade all effects properly, such as the deleting the post's views,
+  the post's images if not used by other posts, etc)
+- Show conglomeration of posts across blogs on /blog landing page.
+- Better modularize website vs blog apps to make more easily importable into
+  other projects. Better organize CSS to be easily customizable, too.
 
 
 ## Requirements
@@ -72,7 +76,10 @@ make the blog app easily importable into any Django project.
     - `Django`: MVC web framework
     - `MySQL-python`: Python interface to MySQL
     - `Markdown`: Python implementation of Markdown, for formatting blog posts
+    - `Pillow`: "friendly" Python Imaging Library fork
     - `django-taggit`: package for handling post tags
+    - `django-storages` and `boto`: for using S3 on Amazon Web Services to
+      serve uploaded media
     - `gunicorn`, `dj-static`, `static3`, `dj-database-url`:
       packages for production-level deploy on heroku
       (Gunicorn is the WSGI HTTP server,
