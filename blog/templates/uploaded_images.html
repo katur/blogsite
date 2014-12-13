@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block page_title %}All your uploaded images{% endblock %}
+
+{% block content %}
+<table id="uploaded-images">
+  <tr>
+    <th>image</th>
+    <th>url</th>
+    <th>title</th>
+    <th>time uploaded</th>
+  </tr>
+  {% for image in images %}
+  <tr>
+    <td>
+      <img src="{{ MEDIA_URL }}{{ image.image }}" width="100" />
+    </td>
+    <td>
+      {{ MEDIA_URL }}{{ image.image }}
+    </td>
+    <td>
+      {{ image.title }}
+    </td>
+    <td>
+      {{ image.time_uploaded }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

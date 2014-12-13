@@ -24,8 +24,5 @@
   {% endif %}
 </form>
 
-<a class="image-upload-link"
-   href="{% url 'upload_image_url' %}"
-   target="_blank"
->Upload an image</a>
+{% include 'upload_image_links.html' %}
 {% endblock %}

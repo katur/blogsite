@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
-from blog.models import Blog, Post, PostView
+from blog.models import Blog, Post, PostView, UploadedImage
 from blog.forms import PostForm, UploadImageForm
 from taggit.models import Tag, TaggedItem
 
@@ -178,6 +178,14 @@ def upload_image(request):
         context = {'form': form}
 
     return render(request, 'upload_image.html', context)
+
+
+@login_required
+def uploaded_images(request):
+    images = UploadedImage.objects.filter(user=request.user).order_by(
+        '-time_uploaded')
+    context = {'images': images}
+    return render(request, 'uploaded_images.html', context)
 
 
 ####################
