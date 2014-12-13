@@ -15,6 +15,8 @@ make the blog app easily importable into any Django project.
   subject to annoying misinterpretations), or too low-level (writing raw HTML).
 - Authors can add and edit their own posts through a custom interface.
   When editing, the form is pre-populated with existing content.
+- Authors can upload images, and insert these into posts with the standard
+  Markdown syntax.
 - An author can choose whether to publish a post, or save it as a draft.
   If saved as a draft, it is only visible to the author (until the author
   chooses to publish it).
@@ -25,6 +27,7 @@ make the blog app easily importable into any Django project.
 - Posts can be tagged with keywords.
 - The number of post views are stored (using Django's session variables,
   so that multiple views by the same person are rarely recorded).
+- Commenting on individual posts with Disqus.
 
 ### Blog-level features
 - A blog can have multiple authors
@@ -45,9 +48,7 @@ make the blog app easily importable into any Django project.
 
 
 ### Future features (not implemented yet)
-- image uploading
 - live Markdown rendering while editing a post
-- commenting (Disqus)
 - allow deleting posts by the author (make sure to cascade effects)
 - Markdown extension for image captions
 - add option to sort posts by popularity (number of views), instead of

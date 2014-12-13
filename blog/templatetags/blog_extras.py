@@ -26,6 +26,16 @@ def extended_markdown(s):
                                        enable_attributes=False))
 
 
+@register.filter(is_safe=True)
+@stringfilter
+def popup(url):
+    html = """
+        window.open('{}', 'blogSitePopup', 'width=800, height=400');
+        return false;
+        """.format(url)
+    return html
+
+
 # Modified from https://djangosnippets.org/snippets/2428/
 @register.tag
 def add_get(parser, token):

@@ -1,9 +1,13 @@
+{% load blog_extras %}
+
 <div id="image-upload-links">
-  <a href="{% url 'upload_image_url' %}" target="_blank">
+  {% url 'upload_image_url' as image_url %}
+  {% url 'uploaded_images_url' as images_url %}
+  <a href="{{ image_url }}" target="_blank" onclick="{{ image_url|popup }}">
     Upload a new image
   </a>
 
-  <a href="{% url 'uploaded_images_url' %}" target="_blank">
+  <a href="{{ images_url }}" target="_blank" onclick="{{ images_url|popup }}">
     See previously uploaded images
   </a>
 </div>

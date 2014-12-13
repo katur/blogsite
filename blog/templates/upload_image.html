@@ -1,16 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'base_base.html' %}
 
-{% block page_title %}Upload an image{% endblock %}
+{% block body_content %}
+<h2>Upload a new image</h2>
+<br>
 
-{% block content %}
 {% if image %}
-
 URL of the image just uploaded:
 <br>
 {{ MEDIA_URL }}{{ image }}
 
 {% else %}
-
 <form enctype="multipart/form-data"
       action="{% url 'upload_image_url' %}"
       method="post">
