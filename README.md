@@ -2,40 +2,69 @@
 
 
 ## Overview
-This is a test website that includes a blogging app. The goal is to eventually
-make the blogging app easily importable into any Django project.
+This is a website featuring a blogging app, where posts are written in
+[Markdown](http://daringfireball.net/projects/markdown/syntax)
+(just like this README file).
+The goal is to eventually make the blogging app easily importable into
+any Django project.
 
-The main inspiration for this blogging app is that posts are written in
-Markdown. I chose to do this because I find existing alternatives either
-too high-level (with Microsoft-Word-like interfaces that interpret text as
-HTML, subject to annoying misinterpretations),
-or too low-level (writing raw HTML).
+The primary inspiration for building this blogging app is that
+I find existing alternatives either too high-level (with Microsoft-Word-like
+interfaces that interpret text as HTML, subject to annoying
+misinterpretations), or too low-level (writing raw HTML, which is cumbersome).
 Specifically, I want to add this app to my mom's birding website, and she has
 complained in the past about her existing blogs on Blogger or Wordpress,
-where text is not always formatted the way she intends.
-But the alternative of writing in raw HTML is too cumbersome.
-I'm hoping that Markdown strikes a nice balance.
+where text does not always format the way she intends.
+I'm hoping that Markdown strikes a nice balance for her, and for others.
 
 This blogging app is not meant to be like wordpress.com or blogger.com,
 where anyone can create an account and create their own blogs.
-Rather, it is meant to be added as an extension
-to a website where the website administrators control what blogs get made and
-who contributes to them.
+Rather, it is meant to be added as an extension to a website where the website
+administrators control what blogs get made and who contributes to them.
 Some examples of where it might be useful:
 
-- An individual's portfolio site, with a single blog and single contributor
+- An individual's portfolio site, with a single blog and single contributor.
 - A site like my mom's birding website, which will have several blogs with
-  several contributors besides my mom, but my mom being the only administrator
-  that controls what blogs are created and who can contribute to them
-- A larger site, such as a newspaper or nonprofit, that might run hundreds
-  of blogs with thousands of contributors, but that would still want to
-  maintain strict control over which blogs are made and who can write to them
+  several contributors besides my mom, but my mom will be the only
+  administrator that controls what blogs are created and who can contribute.
+- A larger website, e.g. for a newspaper or nonprofit, that might run hundreds
+  of blogs with thousands of contributors, but that would like to
+  maintain strict control over which blogs are made and who can contribute.
 
 
-## Notes to Grader
+## Notes / Instructions for Grader
 I got permission from the Professor to do this instead of the question/answer
-service. It is similar to a blog project done in the past. One major difference
-is that this
+service. It is similar to a blog project done in previous years, but one
+major difference is that mine leaves the creation of blogs and blog writers
+to the site administrators.
+
+To test the site, please go to the testing website (submitted via the homework
+permission system, and also listed in `text_accounts_for_grader.txt`).
+You should not be logged in, but you should be able to navigate to the list of
+blogs, and browse both listed blogs. In the list view, you can click on filters
+on the right side of the screen to limit which posts are seen by author or tag.
+To see a post in its entirety and to be able to comment on it (through Disqus),
+click on the post title.
+
+To log in as a contributor, click on Log In (upper right of screen),
+and log in as katherine (user and pw listed in `text_accounts_for_grader.txt`).
+katherine has permissions for Birding Blog only, and does not have permission
+to administer the site otherwise.
+You will see that any drafts that Katherine has in progress, as well as those
+scheduled to be published in the future, now show in the list view (with an
+obvious background to distinguish them from what is publically visible).
+On the upper right of the landing page for the Birding Blog,
+you will see a link to add a new post, and will also see links to edit each
+post that Katherine wrote. After clicking on these, you should be able to
+add/edit post content and titles, see the live Markdown rendering as you write,
+add tags, and save the draft or publish. To upload images, there are links
+at the bottom of the screen (to upload a new image or browse your existing
+uploads), which open popup windows and give the URLs for adding inline
+images (but remember since this is Markdown, you have to use the builtin
+inline image syntax; a reminder of this appears beneath the textarea on the
+add/edit pages).
+
+If you would like to log in as an administer, log out and log in as laura.
 
 
 
