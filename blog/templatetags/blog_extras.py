@@ -16,8 +16,8 @@ def extended_markdown(s):
     Render markdown, with nice extensions.
     '''
     extensions = [
-        'nl2br',  # More intuitive linebreak
-        'smarty',  # emdash, endash, pretty quotes
+        # 'nl2br',  # More intuitive linebreak
+        # 'smarty',  # emdash, endash, pretty quotes
     ]
 
     return mark_safe(markdown.markdown(force_unicode(s),
