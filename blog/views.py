@@ -174,7 +174,8 @@ def upload_image(request):
                 reverse('blog.views.upload_image'), image.image.name)
             return HttpResponseRedirect(redirect_url)
     else:
-        form = UploadImageForm()
+        form = UploadImageForm(initial={'user': request.user})
+        form.fields['user'].widget = forms.HiddenInput()
     context = {'form': form, 'image': image}
     return render(request, 'upload_image.html', context)
 

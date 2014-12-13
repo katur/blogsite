@@ -2,13 +2,9 @@
 
 {% block page_title %}Upload an image{% endblock %}
 
-{% block back_button %}
-  <a href={% url 'home_url' %}>&larr; Back Home</a>
-{% endblock %}
-
 {% block content %}
 {% if image %}
-The image was {{ image }}
+URL of the image just uploaded: {{ MEDIA_URL }}{{ image }}
 {% endif %}
 
 <form enctype="multipart/form-data"
