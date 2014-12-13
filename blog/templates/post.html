@@ -10,13 +10,6 @@
 {% block content %}
 <div id="single-blog-post" class="blog-post">
   {% include 'post_info_and_content.html' %}
-
-  {% if post.is_published %}
-  <div id="disqus_wrapper">
-    <div id="disqus_thread"></div>
-    {% include 'disqus.html' %}
-  </div>
-  {% endif %}
 </div>
 
 {% endblock %}
