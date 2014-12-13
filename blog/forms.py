@@ -9,7 +9,7 @@ Please use
 <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
 Examples:
 <br>
-*bold*, **italics**, - bulleted, 1. numbered
+*italic*, **bold**, - bulleted, 1. numbered
 <br>
 &lt;http://google.com&gt;
 <br>
