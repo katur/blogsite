@@ -32,7 +32,11 @@ class AllPostsFeed(Feed):
         return item.get_absolute_url()
 
     def item_description(self, item):
-        return item.content
+        truncation = 300
+        if len(item.content) > truncation:
+            return item.content[0:truncation] + '...'
+        else:
+            return item.content
 
     def item_author_name(self, item):
         return item.author.get_full_name()
