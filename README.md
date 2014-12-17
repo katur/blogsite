@@ -2,10 +2,7 @@
 
 ## Overview
 This is a website featuring a blogging app, where posts are written in
-[Markdown](http://daringfireball.net/projects/markdown/syntax)
-(just like this README file).
-The goal is to eventually make the blogging app easily importable into
-any Django project.
+[Markdown](http://daringfireball.net/projects/markdown/syntax).
 
 The primary inspiration for building this blogging app is that
 I find existing alternatives either too high-level (with Microsoft-Word-like
@@ -17,10 +14,10 @@ where text does not always format the way she intends.
 I'm hoping that Markdown strikes a nice balance for her, and for others.
 
 This blogging app is not meant to be like wordpress.com or blogger.com,
-where anyone can create an account and create their own blogs.
-Rather, it is meant to be added as an extension to a website where the website
-administrators control what blogs get made and who contributes to them.
-Some examples of where it might be useful:
+where anyone can create an account and start their own blogs.
+Rather, it is meant to be an extension to a website where the website
+administrators maintain control over which blogs get made and who contributes
+to them. Some examples of where it might be useful:
 
 - An individual's portfolio site, with a single blog and single contributor.
 - A site like my mom's birding website, which will have several blogs with
@@ -32,6 +29,23 @@ Some examples of where it might be useful:
 
 
 ## Features
+### Global features
+- Same website can have multiple blogs
+- Infrequent moderation tasks (creating a blog, adding authors) can be done
+  through the Django admin interface. Such privileges should be restricted
+  to site administrators.
+
+### Blog-level features
+- A blog can have multiple authors
+- List-view of posts is paginated, defaulting to 10 posts
+  (but can override by defining BLOG\_POSTS\_PER\_PAGE in settings).
+- Posts are truncated in the list view, defaulting to 500 characters
+  (but can override by defining BLOG\_POST\_TRUNCATION\_FACTOR in settings).
+- List-view of posts is sorted by reverse publication time.
+- The list of posts can be filtered by tag and/or author.
+- Frequency of tags within a blog visualized with a tag cloud.
+- Each blog has an RSS feed (the feed includes all posts from the blog)
+
 ### Post-level features
 - Posts are written in Markdown, with easy syntax for bold, italics, lists,
   links, and inline images.
@@ -54,27 +68,8 @@ Some examples of where it might be useful:
   so that multiple views by the same person are rarely recorded).
 - Anyone can comment on posts (with Disqus commenting).
 
-
-### Blog-level features
-- A blog can have multiple authors
-- List-view of posts is paginated, defaulting to 10 posts
-  (but can override by defining BLOG\_POSTS\_PER\_PAGE in settings).
-- Posts are truncated in the list view, defaulting to 500 characters
-  (but can override by defining BLOG\_POST\_TRUNCATION\_FACTOR in settings).
-- List-view of posts is sorted by reverse publication time.
-- The list of posts can be filtered by tag and/or author.
-- Frequency of tags within a blog visualized with a tag cloud.
-- Each blog has an RSS feed (the feed includes all posts from the blog)
-
-
-### Global features
-- Same website can have multiple blogs
-- Infrequent moderation tasks (creating a blog, adding authors) can be done
-  through the Django admin interface. Such privileges should be restricted
-  to site administrators.
-
-
-### Future directions (not yet implemented)
+<!---
+### Features to build in the future (not yet implemented)
 - Markdown extension for image captions and for video.
 - Add option to sort posts by popularity (number of views), instead of by time
   published.
@@ -86,7 +81,7 @@ Some examples of where it might be useful:
 - Show conglomeration of posts across blogs on landing page.
 - Better modularize website vs blog apps to make more easily importable into
   other projects. Better organize CSS to be easily customizable, too.
-
+-->
 
 ## Instructions for Grader / Test accounts
 I got permission from the Professor to do this instead of the question/answer
