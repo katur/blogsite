@@ -31,10 +31,12 @@ class Blog(models.Model):
 
 
 class Post(models.Model):
+    """A blog post."""
     blog = models.ForeignKey(Blog)
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, editable=False)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(
+        User, help_text='Must be authorized for the selected blog')
     is_published = models.BooleanField(default=False)
     time_published = models.DateTimeField(blank=True, null=True)
     time_modified = models.DateTimeField(auto_now=True)
@@ -82,6 +84,7 @@ class Post(models.Model):
 
 
 class PostView(models.Model):
+    """A record of a post being visited by a new user, evidenced by session."""
     post = models.ForeignKey(Post)
     ip = models.IPAddressField()
     session_key = models.CharField(max_length=50)
@@ -100,6 +103,7 @@ def get_updated_filename(instance, filename):
 
 
 class UploadedImage(models.Model):
+    """An image uploaded to the site, by an author."""
     time_uploaded = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User)
     title = models.CharField(max_length=100, blank=True)
