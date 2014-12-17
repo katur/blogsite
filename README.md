@@ -97,11 +97,12 @@ arbitrary users to create accounts and start blogs.
 
 To test, please go to the testing website (url submitted via the homework
 submission system).
+*NOTE: with my free heroku plan, initial page load takes a little while.*
 From the homepage, click on the prompt for the list of blogs,
-and click on the blogs to browse their posts.
+and click on the listed blog names to browse their posts.
 In the view showing paginated blog posts, select the links on the
 right to filter by author and/or tag.
-To see a post in its entirety and to comment on it,
+To see a post in its entirety and to comment on it (through Disqus),
 click on the post title.
 
 To log in as an author, click on Log In (upper right of screen), and log in as
