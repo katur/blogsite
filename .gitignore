@@ -8,6 +8,8 @@
 staticfiles
 database_backups
 grader.txt
+blogsite.git
+blogsite.git.gz
 
 # Compiled sass/scss files
 *.scssc
