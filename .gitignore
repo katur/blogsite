@@ -7,6 +7,7 @@
 *local_settings.py
 staticfiles
 database_backups
+grader.txt
 
 # Compiled sass/scss files
 *.scssc
