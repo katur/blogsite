@@ -259,7 +259,8 @@ def get_tag_cloud(posts=None, count_threshold=0, max_size=2.0, min_size=.6):
     tags_with_counts = {}
     tag_cloud = []
 
-    if posts:
+    # This case includes empty list, so 'if posts:' does not suffice
+    if posts is not None:
         for post in posts:
             for tag in post.tags.all():
                 tally(tag, tags_with_counts)

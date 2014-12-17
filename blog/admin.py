@@ -8,7 +8,10 @@ class BlogAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'blog', 'author', 'is_published',
+                    'time_published')
+    list_filter = ('blog', 'author', 'is_published', 'time_published')
+
 
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Post, PostAdmin)
