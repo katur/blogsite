@@ -45,20 +45,6 @@ $max-post-width: 650px
     float: left
     clear: both
 
-    h1, h2, h3, h4, ul, p
-      margin-bottom: $spacing / 4
-      &:last-child
-        margin-bottom: 0
-
-    h1
-      font-size: 24px
-    h2
-      font-size: 22px
-    h3
-      font-size: 20px
-    h4
-      font-size: 18px
-
   .blog-post-read-more
     float: left
     clear: both
@@ -68,6 +54,23 @@ $max-post-width: 650px
     float: left
     clear: both
     margin-top: $spacing / 2
+
+
+#markdown-preview, .blog-post-content
+  h1, h2, h3, h4, ul, p
+    margin-bottom: $spacing / 4
+    &:last-child
+      margin-bottom: 0
+
+  h1
+    font-size: 24px
+  h2
+    font-size: 22px
+  h3
+    font-size: 20px
+  h4
+    font-size: 18px
+
 
 
 ////////////////////
@@ -165,6 +168,9 @@ $max-post-width: 650px
 // ADD POST PAGE //
 ///////////////////
 form
+  float: left
+  max-width: 50%
+
   th
     text-align: left
     vertical-align: top
@@ -180,6 +186,13 @@ form
     font-style: italic
     font-size: 14px
 
+#markdown-preview
+  float: right
+  width: 40%
+  min-height: 20px
+  padding: 20px
+  background: $lighter-gray
+  max-width: $max-post-width
 
 #image-upload-links
   a

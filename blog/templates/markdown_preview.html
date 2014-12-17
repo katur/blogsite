@@ -1,0 +1,20 @@
+<div id="markdown-preview"></div>
+
+<script type="text/javascript">
+  function MarkdownWatcher(input, preview) {
+    this.update = function () {
+      preview.html(markdown.toHTML(input.val()));
+    };
+
+    input.get(0).editor = this;
+    this.update();
+  }
+
+  // Initialize the markdown watcher
+  new MarkdownWatcher($("form textarea"), $("#markdown-preview"));
+
+  // Add markdown watcher to the textarea's input event
+  $("form textarea").on("input", function(){
+      $(this).get(0).editor.update();
+  });
+</script>
