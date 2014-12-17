@@ -102,6 +102,7 @@ From the homepage, click on the prompt for the list of blogs,
 and click on the listed blog names to browse their posts.
 In the view showing paginated blog posts, select the links on the
 right to filter by author and/or tag.
+You should also see a link on the right for the current blog's RSS feed.
 To see a post in its entirety and to comment on it (through Disqus),
 click on the post title.
 
@@ -118,19 +119,19 @@ will be on the right part of the "Birding Blog" list view.
 On the pages to add or edit a post, you will see a live Markdown preview as
 you type. Reminders of common Markdown syntax (e.g., italics, bold, links,
 images) appear beneath the textarea,
-along with a link for help with more advanced syntax (e.g., lists).
+along with a link for help with more advanced syntax.
 For an unpublished post, you can choose to save or publish.
-If you would like to publish in the future, enter the date; otherwise,
-the date will default to the time when published.
+If you would like to publish in the future, enter the date and time;
+otherwise, these will default to the time when published.
 To upload an image, follow the link at the bottom of the edit page,
 which opens a popup window and provides the URL after upload
 (remember, since this is Markdown, you have to use the built-in
-image syntax; a reminder of this appears beneath the textarea).
+image syntax to add an inline image to a post;
+a reminder of this appears beneath the textarea).
 
 To test as an administrator, log in as laura (user and pw in `grader.txt`).
 laura has author permissions for both blogs. In addition, laura can access the
-built-in Django admin (located at /admin) to add blogs, add users, and grant
-permissions to users.
+built-in Django admin (located at /admin) to add new blogs and users.
 
 
 ## Developer's Guide
