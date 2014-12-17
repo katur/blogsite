@@ -87,6 +87,12 @@ class PostView(models.Model):
     session_key = models.CharField(max_length=50)
     time_created = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return 'View of ' + self.post.title
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 
 def get_updated_filename(instance, filename):
     path = "images/{}/{}_{}".format(instance.user.id, uuid.uuid4(), filename)
@@ -98,3 +104,9 @@ class UploadedImage(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField(max_length=100, blank=True)
     image = models.ImageField(upload_to=get_updated_filename)
+
+    def __unicode__(self):
+        return self.title
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')

@@ -9,6 +9,10 @@
   {% if user.is_authenticated %}
     Welcome, {{ user.first_name }}!
     <br>
+    {% if user.is_staff %}
+    <a href="{% url 'admin:index' %}">Site Admin</a>
+    <br>
+    {% endif %}
     <a href="{% url 'logout_url' %}?next={{ request.path }}">
       Log out</a>
   {% else %}
