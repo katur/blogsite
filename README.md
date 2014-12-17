@@ -1,4 +1,5 @@
 # Markdown Blog
+### By Katherine Erickson
 
 ## Overview
 This is a website featuring a blogging app, where posts are written in
