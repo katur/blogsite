@@ -18,7 +18,7 @@ This blogging app is not meant to be like wordpress.com or blogger.com,
 where anyone can create an account and start their own blogs.
 Rather, it is an extension to a website where the website
 administrators maintain control over the blogs and who contributes
-to them. Some examples of where it might be useful:
+to them. Examples of where it might be useful:
 
 - An individual's portfolio site, with a single blog and single contributor.
 - A site like my mom's birding website, which will have several blogs with
